@@ -11,7 +11,11 @@ class CounterSpawner extends Entity {
 		super(X, Y);
 		state = State;
 
-		loadGraphic(AssetPaths.counter__png);
+		if (Sideways) {
+			loadGraphic(AssetPaths.side_counter__png);
+		} else {
+			loadGraphic(AssetPaths.counter__png);
+		}
 	}
 
 	public function spawn() {

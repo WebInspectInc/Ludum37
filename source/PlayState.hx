@@ -95,8 +95,8 @@ class PlayState extends FlxState
 			spawnTimer -= elapsed;
 			if (spawnTimer <= 0) {
 				spawnTimer = 12;
-				var spawners = counterSpawners.members;
-				new FlxRandom().shuffle(spawners);
+				var spawners = counterSpawners.members.copy();
+				FlxG.random.shuffle(spawners);
 				for (spawner in spawners) {
 					spawner.spawn();
 				}

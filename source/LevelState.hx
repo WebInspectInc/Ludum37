@@ -23,6 +23,7 @@ class LevelState extends FlxState
 
 		for (i in 0...10) {
 			state.counterSpawners.add(new CounterSpawner(state, i * 257, 0));
+			state.counterSpawners.add(new CounterSpawner(state, 0, i * 257 + 112, true));
 		}
 
 		state.add(level);
