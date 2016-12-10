@@ -81,14 +81,16 @@ class Player extends Entity
 	}
 
 	public function pickup(player:Player, weapon:Weapon) {
-		state.groundWeapons.add(playerWeapon);
 		remove(playerWeapon);
+		state.groundWeapons.add(playerWeapon);
+		playerWeapon.setPosition(x, y);
 		playerWeapon.velocity.set(0, 0);
 		playerWeapon.solid = true;
+
 		state.groundWeapons.remove(weapon);
+		weapon.setPosition(0, 0);
 		add(weapon);
 		weapon.solid = false;
-		playerWeapon.setPosition(x, y);
 		playerWeapon = weapon;
 	}
 }

@@ -24,7 +24,7 @@ class PlayerController
 		_down = FlxG.keys.anyPressed([DOWN, S]);
 		_left = FlxG.keys.anyPressed([LEFT, A]);
 		_right = FlxG.keys.anyPressed([RIGHT, D]);
-		_fire = FlxG.mouse.justPressed;
+		_fire = FlxG.mouse.pressed;
 		_pickup = FlxG.keys.anyJustPressed([E]);
 
 		// Cancel opposite directions
@@ -55,12 +55,12 @@ class PlayerController
 		else if (_left)
 		{
 		    mA = 180;
-		    playerEntity.flipX = true;
+		    playerEntity.sprite.flipX = true;
 		}
 		else if (_right)
 		{
 		    mA = 0;
-		    playerEntity.flipX = false;
+		    playerEntity.sprite.flipX = false;
 		}
 
 		if (_up || _down || _left || _right) {

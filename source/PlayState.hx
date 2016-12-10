@@ -66,7 +66,7 @@ class PlayState extends FlxState
 
 		barriers = new Barriers(this, player);
 
-		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
+		FlxG.camera.follow(player.sprite, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
 
 		var healthBar = new FlxBar(7, 7, LEFT_TO_RIGHT, 100, 20, player, "health", 0, 10, true);
