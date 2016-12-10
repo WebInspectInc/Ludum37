@@ -1,6 +1,6 @@
 package entities.weapons;
 
-import entities.bullets.Bullet;
+import entities.bullets.PeaBullet;
 
 class PeaShooter extends Weapon {
 
@@ -25,7 +25,7 @@ class PeaShooter extends Weapon {
 	override public function fire() {
 		if (cooldown <= 0) {
 			cooldown = 0.17;
-			var newBullet = new Bullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
+			var newBullet = new PeaBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
 		}
 	}
 }

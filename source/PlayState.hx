@@ -34,7 +34,7 @@ class PlayState extends FlxState
 	public var currentWave:Wave;
 	public var waveNumber:Int = 0;
 
-	public var spawnTimer:Float = 10;
+	public var spawnTimer:Float = 2;
 
 	override public function create():Void
 	{
@@ -76,10 +76,11 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+		trace(enemies.countLiving());
 		this.playerController.update();
 		spawnTimer -= elapsed;
 		if (spawnTimer <= 0) {
-			spawnTimer = 6;
+			spawnTimer = 3;
 			var spawners = counterSpawners.members;
 			new FlxRandom().shuffle(spawners);
 			for (spawner in spawners) {

@@ -28,9 +28,9 @@ class Triple extends Weapon {
 	override public function fire() {
 		if (cooldown <= 0) {
 			cooldown = 0.25;
-			var newBullet = new Bullet(this.x, this.y, state, 500, angle, 10, cast(state.playerBullets));
-			var newBullet = new Bullet(this.x, this.y, state, 500, angle + 10, 10, cast(state.playerBullets));
-			var newBullet = new Bullet(this.x, this.y, state, 500, angle - 10, 10, cast(state.playerBullets));
+			var newBullet = new PeaBullet(this.x, this.y, state, 500, angle, 10, cast(state.playerBullets));
+			var newBullet = new PeaBullet(this.x, this.y, state, 500, angle + 10, 10, cast(state.playerBullets));
+			var newBullet = new PeaBullet(this.x, this.y, state, 500, angle - 10, 10, cast(state.playerBullets));
 		}
 
 	}
