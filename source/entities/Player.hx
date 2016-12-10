@@ -18,7 +18,7 @@ import entities.placeable.*;
 class Player extends Entity
 {
 	private static inline var SPRITE_HEIGHT:Int = 100;
-	private static inline var SPRITE_WIDTH:Int = 85;
+	private static inline var SPRITE_WIDTH:Int = 68;
 
 	public var playerWeapon:Weapon;
 
@@ -33,8 +33,9 @@ class Player extends Entity
 		this.health = 10;
 		loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-		animation.add('idle', [0,1,2,3,4,5], 8);
-		animation.add('walk', [6,7,8,9,10,11,12,13,14,15], 4);
+		animation.add('idle', [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33], 26);
+		animation.add('walk', [34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60], 26);
+		animation.add('eyebrows', [0,1,2,3,4,5,6,7], 4);
 		animation.play('idle');
 
 		setSize(24, 58);
