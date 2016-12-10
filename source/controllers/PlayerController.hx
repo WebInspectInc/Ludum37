@@ -12,6 +12,7 @@ class PlayerController
 	var _right:Bool = false;
 	var _fire:Bool = false;
 	var _pickup:Bool = false;
+	var _place:Bool = false;
 
 	var playerEntity:Player;
 
@@ -26,6 +27,7 @@ class PlayerController
 		_right = FlxG.keys.anyPressed([RIGHT, D]);
 		_fire = FlxG.mouse.pressed;
 		_pickup = FlxG.keys.anyJustPressed([E]);
+		_place = FlxG.mouse.justPressedRight;
 
 		// Cancel opposite directions
 		if (_up && _down)
@@ -76,6 +78,10 @@ class PlayerController
 
 		if (_pickup) {
 			playerEntity.pickupWeapon();
+		}
+
+		if (_place) {
+			playerEntity.place();
 		}
 	}
 }

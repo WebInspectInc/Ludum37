@@ -18,9 +18,10 @@ class Entity extends FlxNestedSprite {
 
 	public var parentGroup:FlxGroup;
 
-	public function new(X:Float=0, Y:Float=0, ?Group:FlxGroup) {
+	public function new(X:Float=0, Y:Float=0, ?Group:FlxGroup, ?State:PlayState) {
 		super(X, Y);
 		parentGroup = Group;
+		state = State;
 		if (parentGroup != null) {
 			parentGroup.add(this);
 		}

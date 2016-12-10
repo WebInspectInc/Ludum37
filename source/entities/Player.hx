@@ -13,6 +13,7 @@ import flixel.group.FlxGroup;
 import entities.Entity;
 import entities.weapons.*;
 import entities.bullets.*;
+import entities.placeable.*;
 
 class Player extends Entity
 {
@@ -66,7 +67,7 @@ class Player extends Entity
 
 	override public function update(delta:Float)
 	{
-		playerWeapon.relativeAngle = FlxAngle.angleBetweenMouse(center, true);
+		playerWeapon.relativeAngle = angleToMouse();
 
 		if (this.moving) {
 			velocity.set(this.moveSpeed, 0);
@@ -94,5 +95,33 @@ class Player extends Entity
 		add(weapon);
 		weapon.solid = false;
 		playerWeapon = weapon;
+	}
+
+	public function angleToMouse():Float {
+		return FlxAngle.angleBetweenMouse(center, true);
+	}
+
+	public function place() {
+		var angle = angleToMouse();
+		var dir = FlxAngle.getCartesianCoords(1, angle);
+
+		dir.x = Math.round(dir.x) * 150;
+		dir.y = Math.round(dir.y) * 150;
+
+		var barrier = new CookieBarrier(0, 0, cast(state.placedObjects), state);
+		var hitbox = barrier.getHitbox();
+
+		
+		if (Math.abs(dir.y) > Math.abs(dir.x)) {
+			barrier.x = center.x - barrier.height / 2 + dir.x;
+			barrier.y = center.y + dir.y;
+
+			barrier.angle = 90;
+			barrier.setSize(hitbox.height, hitbox.width);
+			barrier.offset.set(-((hitbox.height / 2) - (hitbox.width / 2)), -(hitbox.width / 2) + (hitbox.height / 2));
+		} else {
+			barrier.x = center.x + dir.x;
+			barrier.y = center.y - barrier.height / 2 + dir.y;
+		}
 	}
 }
