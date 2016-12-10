@@ -35,6 +35,9 @@ class Player extends Entity
 		animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
 		animation.play('idle');
 
+		setSize(24, 58);
+		offset.set(30, 30);
+
 		playerWeapon = new PeaShooter();
 		playerWeapon.solid = false;
 		playerWeapon.state = state;
