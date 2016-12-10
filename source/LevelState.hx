@@ -9,18 +9,21 @@ import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
+import entities.CounterSpawner;
+
 class LevelState extends FlxState
 {
 	public var width:Int = 1200;
 	public var height:Int = 950;
 	public function new(state:PlayState):Void
 	{
-		var level = new FlxSprite(0, 0, AssetPaths.background__png);
+		var level = new FlxSprite(0, 0, AssetPaths.floor__png);
 		level.scale.set(0.4, 0.4);
 		level.origin.set(0, 0);
 
-		// var doors = new FlxSprite();
-		// doors.makeGraphic(width, 30, FlxColor.RED);
+		for (i in 0...5) {
+			state.counterSpawners.add(new CounterSpawner(state, i * 515, 0));
+		}
 
 		state.add(level);
 		// state.add(doors);

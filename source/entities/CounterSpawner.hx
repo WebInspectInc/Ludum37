@@ -11,7 +11,7 @@ class CounterSpawner extends Entity {
 		super(X, Y);
 		state = State;
 
-		sprite.makeGraphic(32, 16, FlxColor.RED);
+		loadGraphic(AssetPaths.counter__png);
 	}
 
 	public function spawn() {

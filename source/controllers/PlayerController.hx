@@ -55,12 +55,12 @@ class PlayerController
 		else if (_left)
 		{
 		    mA = 180;
-		    playerEntity.sprite.flipX = true;
+		    playerEntity.flipX = true;
 		}
 		else if (_right)
 		{
 		    mA = 0;
-		    playerEntity.sprite.flipX = false;
+		    playerEntity.flipX = false;
 		}
 
 		if (_up || _down || _left || _right) {

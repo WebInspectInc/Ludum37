@@ -6,6 +6,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.math.FlxAngle;
+import flixel.addons.display.FlxNestedSprite;
 
 import flixel.group.FlxGroup;
 
@@ -20,36 +21,37 @@ class Player extends Entity
 
 	public var playerWeapon:Weapon;
 
-	public var center:FlxSprite;
+	public var center:FlxNestedSprite;
 
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
 		super(X, Y);
 		state = playState;
 		this.health = 10;
-		sprite.loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+		loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-		sprite.animation.add('idle', [0,1,2,3,4,5,6,7,8,9,10], 8);
-		sprite.animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
-		sprite.animation.play('idle');
+		animation.add('idle', [0,1,2,3,4,5,6,7,8,9,10], 8);
+		animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
+		animation.play('idle');
 
 		playerWeapon = new PeaShooter();
 		playerWeapon.solid = false;
 		playerWeapon.state = state;
 		add(playerWeapon);
 
-		center = new FlxSprite();
+		center = new FlxNestedSprite();
 		center.makeGraphic(1, 1, FlxColor.TRANSPARENT);
-		center.setPosition(50, 43);
+		center.relativeX = 50;
+		center.relativeY = 43;
 		add(center);
 	}
 
 	public function setMoving(moving:Bool) {
 		this.moving = moving;
 		if (moving) {
-			sprite.animation.play('walk');
+			animation.play('walk');
 		} else {
-			sprite.animation.play('idle');
+			animation.play('idle');
 		}
 	}
 
@@ -64,7 +66,7 @@ class Player extends Entity
 
 	override public function update(delta:Float)
 	{
-		playerWeapon.angle = FlxAngle.angleBetweenMouse(center, true);
+		playerWeapon.relativeAngle = FlxAngle.angleBetweenMouse(center, true);
 
 		if (this.moving) {
 			velocity.set(this.moveSpeed, 0);
