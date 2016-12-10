@@ -11,6 +11,8 @@ class Cockroach extends Entity {
 
 	private var accelerationSpeed:Int = 1000;
 
+	private var attackCooldown:Float;
+
 	public function new(?X:Float=0, ?Y:Float=0) {
 		super(X, Y);
 		makeGraphic(16, 16, FlxColor.ORANGE);
@@ -22,7 +24,14 @@ class Cockroach extends Entity {
 	}
 
 	override public function update(delta: Float) {
+		attackCooldown -= delta;
+
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
+
+		if (overlaps(state.player) && attackCooldown <= 0) {
+			attackCooldown = 1;
+			state.player.hurt(1);
+		}
 
 		moveAngle = angle;
 

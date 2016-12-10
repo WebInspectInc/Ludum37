@@ -10,6 +10,7 @@ class Player extends entities.Entity {
 
 	public function new(?X:Float=0, ?Y:Float=0) {
 		super(X, Y);
+		this.health = 10;
 		makeGraphic(16, 16, FlxColor.RED);
 		this.moveSpeed = 200;
 	}
