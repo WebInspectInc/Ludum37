@@ -10,6 +10,7 @@ import flixel.util.FlxColor;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.ui.FlxBar;
 import flixel.group.FlxGroup;
+import flixel.math.FlxRandom;
 
 import entities.*;
 import entities.weapons.*;
@@ -28,6 +29,12 @@ class PlayState extends FlxState
 	public var enemies:FlxTypedGroup<Entity>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
 	public var groundWeapons:FlxTypedGroup<Weapon>;
+	public var counterSpawners:FlxTypedGroup<CounterSpawner>;
+
+	public var currentWave:Wave;
+	public var waveNumber:Int = 0;
+
+	public var spawnTimer:Float = 10;
 
 	override public function create():Void
 	{
@@ -37,6 +44,10 @@ class PlayState extends FlxState
 		add(playerBullets);
 		groundWeapons = new FlxTypedGroup<Weapon>();
 		add(groundWeapons);
+		counterSpawners = new FlxTypedGroup<CounterSpawner>();
+		add(counterSpawners);
+		counterSpawners.add(new CounterSpawner(this, 0,50));
+		counterSpawners.add(new CounterSpawner(this, 700,50));
 
 		add(level);
 
@@ -49,11 +60,7 @@ class PlayState extends FlxState
 		triple.state = this;
 		groundWeapons.add(triple);
 
-		var roaches = Wave.getWave(0).createEnemies(cast(enemies));
-		for (roach in roaches) {
-			roach.state = this;
-			add(roach);
-		}
+		currentWave = Wave.getWave(waveNumber);
 
 		playerController = new PlayerController(this.player);
 
@@ -70,6 +77,15 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		this.playerController.update();
+		spawnTimer -= elapsed;
+		if (spawnTimer <= 0) {
+			spawnTimer = 6;
+			var spawners = counterSpawners.members;
+			new FlxRandom().shuffle(spawners);
+			for (spawner in spawners) {
+				spawner.spawn();
+			}
+		}
 		barriers.update(elapsed);
 
 		FlxG.collide(player, barriers.walls);

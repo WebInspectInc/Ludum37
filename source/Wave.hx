@@ -9,6 +9,7 @@ class Wave {
 	private static var waves:Array<Wave> = null;
 
 	private var waveData:Array<WaveData>;
+	private var groupNumber:Int = 0;
 
 	public function new(Data:Array<WaveData>) {
 		waveData = Data;
@@ -20,10 +21,23 @@ class Wave {
 		for (waveGroup in waveData) {
 			y += 40;
 			for (i in 0...waveGroup.enemyCount) {
-				var x = i * 40 + 200;
+				var x = i * 40;
 				var enemy = Type.createInstance(waveGroup.enemyClass, [x, y, group]);
 				enemies.push(enemy);
 			}
+		}
+		return enemies;
+	}
+
+	public function nextGroup(group:FlxGroup):Array<Entity> {
+		if (groupNumber >= waveData.length) return null;
+		var waveGroup = waveData[groupNumber];
+		groupNumber++;
+		var enemies = new Array<Entity>();
+		for (i in 0...waveGroup.enemyCount) {
+			var x = i * 40;
+			var enemy = Type.createInstance(waveGroup.enemyClass, [x, 0, group]);
+			enemies.push(enemy);
 		}
 		return enemies;
 	}
