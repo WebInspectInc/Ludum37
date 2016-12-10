@@ -26,7 +26,7 @@ class Deathroach extends Entity {
 		setSize(191, 171);
 		offset.set(93, 114);
 
-		health = 60;
+		health = 400;
 
 		this.moveSpeed = 40;
 

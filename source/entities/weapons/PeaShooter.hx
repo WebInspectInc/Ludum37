@@ -34,7 +34,7 @@ class PeaShooter extends Weapon {
 			var newBullet = new PeaBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
 
 			fireSound.play(true);
-			FlxG.camera.shake(0.005, 0.15);
+			FlxG.camera.shake(0.002, 0.15);
 		}
 	}
 }
