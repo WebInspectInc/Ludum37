@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+import flixel.FlxCamera.FlxCameraFollowStyle;
 
 import entities.Player;
 import controllers.PlayerController;
@@ -29,6 +30,9 @@ class PlayState extends FlxState
 		add(player);
 
 		playerController = new PlayerController(this.player);
+
+		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
+		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
 	}
 
 	override public function update(elapsed:Float):Void
