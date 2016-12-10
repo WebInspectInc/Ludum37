@@ -28,7 +28,6 @@ class Weapon extends FlxNestedSprite
 	}
 
 	override public function update(delta:Float) {
-
 		for (b in bulletArray) {
 			if (b.isTouching(FlxObject.ANY) || !b.isOnScreen()) {
 				bulletArray.remove(b);

@@ -23,7 +23,7 @@ class PlayerController
 		_down = FlxG.keys.anyPressed([DOWN, S]);
 		_left = FlxG.keys.anyPressed([LEFT, A]);
 		_right = FlxG.keys.anyPressed([RIGHT, D]);
-		_fire = FlxG.mouse.justReleased;
+		_fire = FlxG.mouse.justPressed;
 
 		// Cancel opposite directions
 		if (_up && _down)

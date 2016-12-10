@@ -16,13 +16,17 @@ import entities.Weapon;
 import entities.Bullet;
 import entities.Player;
 import entities.Cockroach;
+import entities.Barriers;
 import controllers.PlayerController;
 
 class PlayState extends FlxState
 {
 	private var playerController:PlayerController;
 	public var player:Player;
-	private static var level:LevelState;
+	private var level:LevelState;
+	private var barriers:Barriers;
+
+	private var roach:Cockroach;
 
 	override public function create():Void
 	{
@@ -32,14 +36,16 @@ class PlayState extends FlxState
 
 		super.create();
 
-		this.player = new Player(this);
+		player = new Player(this);
 		add(player);
 
-		var roach = new Cockroach(400, 400);
+		roach = new Cockroach(400, 400);
 		roach.state = this;
 		add(roach);
 
 		playerController = new PlayerController(this.player);
+
+		barriers = new Barriers(this, player);
 
 		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
@@ -52,6 +58,10 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		this.playerController.update();
+		barriers.update(elapsed);
+
+		FlxG.collide(player, barriers.walls);
+		FlxG.collide(roach, barriers.walls);
 
 		super.update(elapsed);
 	}
