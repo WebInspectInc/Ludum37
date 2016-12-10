@@ -18,6 +18,8 @@ import entities.Player;
 import entities.Cockroach;
 import controllers.PlayerController;
 
+import Wave;
+
 class PlayState extends FlxState
 {
 	private var playerController:PlayerController;
@@ -38,9 +40,15 @@ class PlayState extends FlxState
 		this.player = new Player(this);
 		add(player);
 
-		var roach = new Cockroach(400, 400, cast(enemies));
-		roach.state = this;
-		add(roach);
+		// var roach = new Cockroach(400, 400, cast(enemies));
+		// roach.state = this;
+		// add(roach);
+
+		var roaches = Wave.getWave(0).createEnemies(cast(enemies));
+		for (roach in roaches) {
+			roach.state = this;
+			add(roach);
+		}
 
 		playerController = new PlayerController(this.player);
 
