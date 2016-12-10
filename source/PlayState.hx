@@ -23,8 +23,6 @@ class PlayState extends FlxState
 	private var level:LevelState;
 	private var barriers:Barriers;
 
-	private var roach:Cockroach;
-
 	public var enemies:FlxTypedGroup<Entity>;
 
 	override public function create():Void
@@ -38,10 +36,6 @@ class PlayState extends FlxState
 
 		player = new Player(this);
 		add(player);
-
-		// var roach = new Cockroach(400, 400, cast(enemies));
-		// roach.state = this;
-		// add(roach);
 
 		var roaches = Wave.getWave(0).createEnemies(cast(enemies));
 		for (roach in roaches) {
@@ -67,7 +61,8 @@ class PlayState extends FlxState
 		barriers.update(elapsed);
 
 		FlxG.collide(player, barriers.walls);
-		FlxG.collide(roach, barriers.walls);
+		FlxG.collide(enemies, barriers.walls);
+		FlxG.collide(enemies, enemies);
 
 		super.update(elapsed);
 	}
