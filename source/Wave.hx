@@ -36,6 +36,10 @@ class Wave {
 		if (waves == null) {
 			waves = [
 				new Wave([{enemyClass: Cockroach, enemyCount: 3},
+						  {enemyClass: Cockroach, enemyCount: 3},
+						  {enemyClass: Cockroach, enemyCount: 3},
+						  {enemyClass: Cockroach, enemyCount: 3},
+						  {enemyClass: Cockroach, enemyCount: 3},
 						  {enemyClass: Cockroach, enemyCount: 3}])
 			];
 		}

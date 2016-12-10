@@ -12,6 +12,8 @@ import flixel.ui.FlxBar;
 import flixel.group.FlxGroup;
 
 import entities.*;
+import entities.weapons.*;
+import entities.bullets.*;
 import controllers.PlayerController;
 
 import Wave;
@@ -24,11 +26,17 @@ class PlayState extends FlxState
 	private var barriers:Barriers;
 
 	public var enemies:FlxTypedGroup<Entity>;
+	public var playerBullets:FlxTypedGroup<Bullet>;
+	public var groundWeapons:FlxTypedGroup<Weapon>;
 
 	override public function create():Void
 	{
 		level = new LevelState(this);
 		enemies = new FlxTypedGroup<Entity>();
+		playerBullets = new FlxTypedGroup<Bullet>();
+		add(playerBullets);
+		groundWeapons = new FlxTypedGroup<Weapon>();
+		add(groundWeapons);
 
 		add(level);
 
@@ -36,6 +44,10 @@ class PlayState extends FlxState
 
 		player = new Player(this);
 		add(player);
+
+		var triple = new Triple(500, 600);
+		triple.state = this;
+		groundWeapons.add(triple);
 
 		var roaches = Wave.getWave(0).createEnemies(cast(enemies));
 		for (roach in roaches) {

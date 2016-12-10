@@ -11,6 +11,7 @@ class PlayerController
 	var _left:Bool = false;
 	var _right:Bool = false;
 	var _fire:Bool = false;
+	var _pickup:Bool = false;
 
 	var playerEntity:Player;
 
@@ -24,6 +25,7 @@ class PlayerController
 		_left = FlxG.keys.anyPressed([LEFT, A]);
 		_right = FlxG.keys.anyPressed([RIGHT, D]);
 		_fire = FlxG.mouse.justPressed;
+		_pickup = FlxG.keys.anyJustPressed([E]);
 
 		// Cancel opposite directions
 		if (_up && _down)
@@ -68,6 +70,10 @@ class PlayerController
 
 		if (_fire) {
 			playerEntity.useWeapon(FlxAngle.angleBetweenMouse(this.playerEntity, true));
+		}
+
+		if (_pickup) {
+			playerEntity.pickupWeapon();
 		}
 	}
 }

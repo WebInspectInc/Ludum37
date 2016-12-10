@@ -1,5 +1,6 @@
 package entities;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
@@ -8,8 +9,8 @@ import flixel.math.FlxPoint;
 import flixel.group.FlxGroup;
 
 import entities.Entity;
-import entities.Weapon;
-import entities.Bullet;
+import entities.weapons.*;
+import entities.bullets.*;
 
 class Player extends Entity
 {
@@ -26,7 +27,6 @@ class Player extends Entity
 		playerWeapon = new Weapon();
 		playerWeapon.state = state;
 		add(playerWeapon);
-		state.add(playerWeapon.bulletArray);
 	}
 
 	public function setMoving(moving:Bool) {
@@ -52,5 +52,18 @@ class Player extends Entity
 		}
 
 		super.update(delta);
+	}
+
+	public function pickupWeapon() {
+		FlxG.overlap(this, state.groundWeapons, pickup);
+	}
+
+	public function pickup(player:Player, weapon:Weapon) {
+		state.groundWeapons.add(playerWeapon);
+		remove(playerWeapon);
+		state.groundWeapons.remove(weapon);
+		add(weapon);
+		playerWeapon.setPosition(x, y);
+		playerWeapon = weapon;
 	}
 }
