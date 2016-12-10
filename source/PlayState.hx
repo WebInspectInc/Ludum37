@@ -12,10 +12,6 @@ import flixel.ui.FlxBar;
 import flixel.group.FlxGroup;
 
 import entities.*;
-import entities.Weapon;
-import entities.Bullet;
-import entities.Player;
-import entities.Cockroach;
 import controllers.PlayerController;
 
 import Wave;
@@ -24,7 +20,10 @@ class PlayState extends FlxState
 {
 	private var playerController:PlayerController;
 	public var player:Player;
-	private static var level:LevelState;
+	private var level:LevelState;
+	private var barriers:Barriers;
+
+	private var roach:Cockroach;
 
 	public var enemies:FlxTypedGroup<Entity>;
 
@@ -37,7 +36,7 @@ class PlayState extends FlxState
 
 		super.create();
 
-		this.player = new Player(this);
+		player = new Player(this);
 		add(player);
 
 		// var roach = new Cockroach(400, 400, cast(enemies));
@@ -52,6 +51,8 @@ class PlayState extends FlxState
 
 		playerController = new PlayerController(this.player);
 
+		barriers = new Barriers(this, player);
+
 		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
 
@@ -63,6 +64,10 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		this.playerController.update();
+		barriers.update(elapsed);
+
+		FlxG.collide(player, barriers.walls);
+		FlxG.collide(roach, barriers.walls);
 
 		super.update(elapsed);
 	}
