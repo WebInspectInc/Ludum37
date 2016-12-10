@@ -75,7 +75,12 @@ class PlayState extends FlxState
 		FlxG.collide(player, barriers.walls);
 		FlxG.collide(enemies, barriers.walls);
 		FlxG.collide(enemies, enemies);
+		FlxG.overlap(player.playerWeapon.bulletArray, barriers.walls, destroyBullet);
 
 		super.update(elapsed);
+	}
+
+	function destroyBullet(bullet:Bullet, wall:FlxSprite):Void {
+		bullet.kill();
 	}
 }

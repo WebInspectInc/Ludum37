@@ -6,6 +6,7 @@ import flixel.math.FlxPoint;
 import flixel.group.FlxGroup;
 
 import flixel.addons.display.FlxNestedSprite;
+import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Entity extends FlxNestedSprite {
 	private var moving:Bool;

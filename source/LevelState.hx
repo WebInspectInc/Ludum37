@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class LevelState extends FlxState
 {
@@ -14,14 +15,15 @@ class LevelState extends FlxState
 	public var height:Int = 950;
 	public function new(state:PlayState):Void
 	{
-		var level = new FlxSprite();
-		level.makeGraphic(width, height, FlxColor.BROWN);
+		var level = new FlxSprite(0, 0, AssetPaths.background__png);
+		level.scale.set(0.4, 0.4);
+		level.origin.set(0, 0);
 
-		var doors = new FlxSprite();
-		doors.makeGraphic(width, 30, FlxColor.RED);
+		// var doors = new FlxSprite();
+		// doors.makeGraphic(width, 30, FlxColor.RED);
 
 		state.add(level);
-		state.add(doors);
+		// state.add(doors);
 
 		super();
 	}
