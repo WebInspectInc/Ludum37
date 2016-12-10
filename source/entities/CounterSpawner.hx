@@ -7,7 +7,7 @@ import entities.*;
 
 class CounterSpawner extends Entity {
 
-	public function new(State:PlayState, X:Float, Y:Float) {
+	public function new(State:PlayState, X:Float, Y:Float, Sideways:Bool = false) {
 		super(X, Y);
 		state = State;
 

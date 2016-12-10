@@ -21,8 +21,8 @@ class LevelState extends FlxState
 		level.scale.set(0.4, 0.4);
 		level.origin.set(0, 0);
 
-		for (i in 0...5) {
-			state.counterSpawners.add(new CounterSpawner(state, i * 515, 0));
+		for (i in 0...10) {
+			state.counterSpawners.add(new CounterSpawner(state, i * 257, 0));
 		}
 
 		state.add(level);
