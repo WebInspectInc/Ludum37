@@ -10,8 +10,8 @@ import flixel.util.FlxColor;
 
 class LevelState extends FlxState
 {
-	private static var width:Int = 900;
-	private static var height:Int = 650;
+	public var width:Int = 1200;
+	public var height:Int = 950;
 	public function new(state:PlayState):Void
 	{
 		var level = new FlxSprite();
