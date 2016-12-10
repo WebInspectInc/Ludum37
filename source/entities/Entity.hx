@@ -3,9 +3,10 @@ package entities;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
-import entities.Entity;
 
-class Entity extends FlxSprite {
+import flixel.addons.display.FlxNestedSprite;
+
+class Entity extends FlxNestedSprite {
 	private var moving:Bool;
 	private var moveAngle:Float;
 
