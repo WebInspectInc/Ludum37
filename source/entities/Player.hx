@@ -30,8 +30,8 @@ class Player extends Entity
 		this.health = 10;
 		loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-		animation.add('idle', [0,1,2,3,4,5,6,7,8,9,10], 8);
-		animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
+		animation.add('idle', [0,1,2,3,4,5], 8);
+		animation.add('walk', [6,7,8,9,10,11,12,13,14,15], 4);
 		animation.play('idle');
 
 		setSize(24, 58);

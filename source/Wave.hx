@@ -21,7 +21,7 @@ class Wave {
 		for (waveGroup in waveData) {
 			y += 40;
 			for (i in 0...waveGroup.enemyCount) {
-				var x = i * 40;
+				var x = i * 75;
 				var enemy = Type.createInstance(waveGroup.enemyClass, [x, y, group]);
 				enemies.push(enemy);
 			}
@@ -35,7 +35,7 @@ class Wave {
 		groupNumber++;
 		var enemies = new Array<Entity>();
 		for (i in 0...waveGroup.enemyCount) {
-			var x = i * 40;
+			var x = i * 75;
 			var enemy = Type.createInstance(waveGroup.enemyClass, [x, 0, group]);
 			enemies.push(enemy);
 		}
@@ -54,9 +54,9 @@ class Wave {
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
-						  {enemyClass: Cockroach, enemyCount: 1},
-						  {enemyClass: Cockroach, enemyCount: 1},
-						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Ant, enemyCount: 5},
+						  {enemyClass: Ant, enemyCount: 5},
+						  {enemyClass: Ant, enemyCount: 5},
 						  {enemyClass: Deathroach, enemyCount: 1}])
 			];
 		}

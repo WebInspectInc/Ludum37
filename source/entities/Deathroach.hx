@@ -9,8 +9,8 @@ import flixel.group.FlxGroup;
 import entities.Entity;
 
 class Deathroach extends Entity {
-	private static inline var SPRITE_HEIGHT:Int = 256;
-	private static inline var SPRITE_WIDTH:Int = 252;
+	private static inline var SPRITE_HEIGHT:Int = 404;
+	private static inline var SPRITE_WIDTH:Int = 402;
 
 	private var accelerationSpeed:Int = 500;
 
@@ -23,8 +23,8 @@ class Deathroach extends Entity {
 		animation.add('walk', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25], 25);
 		animation.play('walk');
 
-		setSize(130, 88);
-		offset.set(41, 86);
+		setSize(191, 171);
+		offset.set(93, 114);
 
 		health = 60;
 
