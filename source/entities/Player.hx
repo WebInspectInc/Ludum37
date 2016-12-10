@@ -20,6 +20,7 @@ class Player extends Entity
 	{
 		state = playState;
 		super(X, Y);
+		this.health = 10;
 		makeGraphic(16, 16, FlxColor.RED);
 
 		playerWeapon = new Weapon();

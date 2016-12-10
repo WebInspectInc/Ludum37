@@ -8,6 +8,7 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.FlxCamera.FlxCameraFollowStyle;
+import flixel.ui.FlxBar;
 
 import flixel.group.FlxGroup;
 
@@ -42,6 +43,9 @@ class PlayState extends FlxState
 
 		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
+
+		var healthBar = new FlxBar(7, 7, LEFT_TO_RIGHT, 100, 20, player, "health", 0, 10, true);
+		add(healthBar);
 	}
 
 	override public function update(elapsed:Float):Void
