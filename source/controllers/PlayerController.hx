@@ -53,17 +53,21 @@ class PlayerController
 		else if (_left)
 		{
 		    mA = 180;
+		    playerEntity.flipX = true;
 		}
 		else if (_right)
 		{
 		    mA = 0;
+		    playerEntity.flipX = false;
 		}
 
 		if (_up || _down || _left || _right) {
-			this.playerEntity.setMoving(true);
-			this.playerEntity.setMoveAngle(mA);
+			playerEntity.setMoving(true);
+			playerEntity.setMoveAngle(mA);
+			playerEntity.animation.play('walk');
 		} else {
-			this.playerEntity.setMoving(false);
+			playerEntity.setMoving(false);
+			playerEntity.animation.play('idle');
 		}
 
 		if (_fire) {

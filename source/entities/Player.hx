@@ -13,6 +13,9 @@ import entities.Bullet;
 
 class Player extends Entity
 {
+	private static inline var SPRITE_HEIGHT:Int = 200;
+	private static inline var SPRITE_WIDTH:Int = 171;
+
 	public var playerWeapon:Weapon;
 
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
@@ -20,7 +23,13 @@ class Player extends Entity
 		state = playState;
 		super(X, Y);
 		this.health = 10;
-		makeGraphic(16, 16, FlxColor.RED);
+		loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+
+		animation.add('idle', [0,1,2,3,4,5,6,7,8,9,10], 8);
+		animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
+		animation.play('idle');
+
+		scale.set(0.5, 0.5);
 
 		playerWeapon = new Weapon();
 		playerWeapon.state = state;
