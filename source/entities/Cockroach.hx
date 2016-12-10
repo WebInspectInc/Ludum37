@@ -11,7 +11,7 @@ class Cockroach extends Entity {
 
 	private var accelerationSpeed:Int = 1000;
 
-	private var attackCooldown:Float;
+	private var attackCooldown:Float = 0;
 
 	public function new(?X:Float=0, ?Y:Float=0) {
 		super(X, Y);

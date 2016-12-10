@@ -45,6 +45,7 @@ class PlayState extends FlxState
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
 
 		var healthBar = new FlxBar(7, 7, LEFT_TO_RIGHT, 100, 20, player, "health", 0, 10, true);
+		healthBar.scrollFactor.set(0, 0);
 		add(healthBar);
 	}
 
