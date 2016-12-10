@@ -9,21 +9,17 @@ import flixel.group.FlxSpriteGroup;
 import flixel.addons.display.FlxNestedSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
-class Entity extends flixel.group.FlxSpriteGroup {
+class Entity extends FlxNestedSprite {
 	private var moving:Bool;
 	private var moveAngle:Float;
 
 	private var moveSpeed:Int = 200;
 	public var state:PlayState;
 
-	public var sprite:FlxSprite;
-
 	public var parentGroup:FlxGroup;
 
 	public function new(X:Float=0, Y:Float=0, ?Group:FlxGroup) {
 		super(X, Y);
-		sprite = new FlxSprite();
-		add(sprite);
 		parentGroup = Group;
 		if (parentGroup != null) {
 			parentGroup.add(this);

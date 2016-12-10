@@ -7,11 +7,15 @@ import entities.*;
 
 class CounterSpawner extends Entity {
 
-	public function new(State:PlayState, X:Float, Y:Float) {
+	public function new(State:PlayState, X:Float, Y:Float, Sideways:Bool = false) {
 		super(X, Y);
 		state = State;
 
-		sprite.makeGraphic(32, 16, FlxColor.RED);
+		if (Sideways) {
+			loadGraphic(AssetPaths.side_counter__png);
+		} else {
+			loadGraphic(AssetPaths.counter__png);
+		}
 	}
 
 	public function spawn() {

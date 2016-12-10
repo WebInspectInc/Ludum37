@@ -44,18 +44,16 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
+		counterSpawners = new FlxTypedGroup<CounterSpawner>();
 		level = new LevelState(this);
+		add(level);
 		enemies = new FlxTypedGroup<Entity>();
 		playerBullets = new FlxTypedGroup<Bullet>();
 		add(playerBullets);
 		groundWeapons = new FlxTypedGroup<Weapon>();
 		add(groundWeapons);
-		counterSpawners = new FlxTypedGroup<CounterSpawner>();
 		add(counterSpawners);
-		counterSpawners.add(new CounterSpawner(this, 0,50));
-		counterSpawners.add(new CounterSpawner(this, 700,50));
 
-		add(level);
 
 		super.create();
 
@@ -72,7 +70,7 @@ class PlayState extends FlxState
 
 		barriers = new Barriers(this, player);
 
-		FlxG.camera.follow(player.sprite, FlxCameraFollowStyle.TOPDOWN);
+		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
 
 		var healthBar = new FlxBar(7, 7, LEFT_TO_RIGHT, 100, 20, player, "health", 0, 10, true);
@@ -97,8 +95,8 @@ class PlayState extends FlxState
 			spawnTimer -= elapsed;
 			if (spawnTimer <= 0) {
 				spawnTimer = 12;
-				var spawners = counterSpawners.members;
-				new FlxRandom().shuffle(spawners);
+				var spawners = counterSpawners.members.copy();
+				FlxG.random.shuffle(spawners);
 				for (spawner in spawners) {
 					spawner.spawn();
 				}
