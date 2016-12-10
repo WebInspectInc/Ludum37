@@ -14,7 +14,6 @@ import entities.Bullet;
 class Player extends Entity
 {
 	public var playerWeapon:Weapon;
-	public var playerBullets:FlxTypedGroup<Bullet>;
 
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
