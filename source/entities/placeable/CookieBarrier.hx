@@ -8,4 +8,6 @@ class CookieBarrier extends Placeable {
 		loadGraphic(AssetPaths.cookie__png);
 		immovable = true;
 	}
+
+	
 }

@@ -24,6 +24,8 @@ class Player extends Entity
 
 	public var center:FlxNestedSprite;
 
+	public var placing:Placeable;
+
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
 		super(X, Y);
@@ -79,6 +81,8 @@ class Player extends Entity
 			velocity.set(0, 0);
 		}
 
+		movePlacing();
+
 		super.update(delta);
 	}
 
@@ -105,26 +109,34 @@ class Player extends Entity
 	}
 
 	public function place() {
+		var barrier = new CookieBarrier(0, 0, cast(state.placedObjects), state);
+		placing = barrier;
+		movePlacing();
+	}
+
+	public function movePlacing() {
+		if (placing == null) return;
 		var angle = angleToMouse();
 		var dir = FlxAngle.getCartesianCoords(1, angle);
 
-		dir.x = Math.round(dir.x) * 150;
-		dir.y = Math.round(dir.y) * 150;
+		dir.x = Math.round(dir.x) * 170;
+		dir.y = Math.round(dir.y) * 170;
 
-		var barrier = new CookieBarrier(0, 0, cast(state.placedObjects), state);
-		var hitbox = barrier.getHitbox();
+		var hitbox = placing.getHitbox();
 
-		
+		var pos = new FlxPoint();
 		if (Math.abs(dir.y) > Math.abs(dir.x)) {
-			barrier.x = center.x - barrier.height / 2 + dir.x;
-			barrier.y = center.y + dir.y;
-
-			barrier.angle = 90;
-			barrier.setSize(hitbox.height, hitbox.width);
-			barrier.offset.set(-((hitbox.height / 2) - (hitbox.width / 2)), -(hitbox.width / 2) + (hitbox.height / 2));
+			pos.x = center.x - placing.height / 2;
+			pos.y = center.y + dir.y - placing.width / 2;
 		} else {
-			barrier.x = center.x + dir.x;
-			barrier.y = center.y - barrier.height / 2 + dir.y;
+			pos.x = center.x + dir.x - placing.width / 2;
+			pos.y = center.y - placing.height / 2;
 		}
+		placing.setPosition(pos.x, pos.y);
+	}
+
+	public function setDown() {
+		placing.setDown();
+		placing = null;
 	}
 }

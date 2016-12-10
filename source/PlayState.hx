@@ -42,7 +42,7 @@ class PlayState extends FlxState
 	public var currentWave:Wave;
 	public var waveNumber:Int = 0;
 
-	public var spawnTimer:Float = 2;
+	public var spawnTimer:Float = 200;
 
 	override public function create():Void
 	{
