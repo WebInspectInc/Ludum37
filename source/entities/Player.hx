@@ -33,6 +33,7 @@ class Player extends Entity
 		scale.set(0.5, 0.5);
 
 		playerWeapon = new Weapon();
+		playerWeapon.solid = false;
 		playerWeapon.state = state;
 		add(playerWeapon);
 	}
@@ -69,8 +70,11 @@ class Player extends Entity
 	public function pickup(player:Player, weapon:Weapon) {
 		state.groundWeapons.add(playerWeapon);
 		remove(playerWeapon);
+		playerWeapon.velocity.set(0, 0);
+		playerWeapon.solid = true;
 		state.groundWeapons.remove(weapon);
 		add(weapon);
+		weapon.solid = false;
 		playerWeapon.setPosition(x, y);
 		playerWeapon = weapon;
 	}
