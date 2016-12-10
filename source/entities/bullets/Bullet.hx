@@ -1,7 +1,9 @@
 package entities.bullets;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.FlxObject;
@@ -33,7 +35,6 @@ class Bullet extends entities.Entity
 	}
 
 	public function hit(e:Entity) {
-
 	}
 
 	override public function update(delta:Float) {
