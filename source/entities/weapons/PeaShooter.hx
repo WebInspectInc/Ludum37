@@ -4,6 +4,8 @@ import entities.bullets.Bullet;
 
 class PeaShooter extends Weapon {
 
+	private var cooldown:Float = 0;
+
 	private static inline var SPRITE_HEIGHT:Int = 26;
 	private static inline var SPRITE_WIDTH:Int = 100;
 	
@@ -15,7 +17,15 @@ class PeaShooter extends Weapon {
 		solid = true;
 	}
 
+	override public function update(delta:Float) {
+		cooldown -= delta;
+		super.update(delta);
+	}
+
 	override public function fire() {
-		var newBullet = new Bullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
+		if (cooldown <= 0) {
+			cooldown = 0.17;
+			var newBullet = new Bullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
+		}
 	}
 }
