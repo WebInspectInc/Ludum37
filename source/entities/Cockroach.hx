@@ -4,8 +4,9 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
-import entities.Entity;
 import flixel.math.FlxAngle;
+import flixel.group.FlxGroup;
+import entities.Entity;
 
 class Cockroach extends Entity {
 
@@ -13,8 +14,8 @@ class Cockroach extends Entity {
 
 	private var attackCooldown:Float = 0;
 
-	public function new(?X:Float=0, ?Y:Float=0) {
-		super(X, Y);
+	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
+		super(X, Y, Group);
 		makeGraphic(16, 16, FlxColor.ORANGE);
 
 		this.moveSpeed = 100;

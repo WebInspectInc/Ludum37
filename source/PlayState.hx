@@ -9,9 +9,9 @@ import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.ui.FlxBar;
-
 import flixel.group.FlxGroup;
 
+import entities.*;
 import entities.Weapon;
 import entities.Bullet;
 import entities.Player;
@@ -24,9 +24,12 @@ class PlayState extends FlxState
 	public var player:Player;
 	private static var level:LevelState;
 
+	public var enemies:FlxTypedGroup<Entity>;
+
 	override public function create():Void
 	{
 		level = new LevelState(this);
+		enemies = new FlxTypedGroup<Entity>();
 
 		add(level);
 
@@ -35,7 +38,7 @@ class PlayState extends FlxState
 		this.player = new Player(this);
 		add(player);
 
-		var roach = new Cockroach(400, 400);
+		var roach = new Cockroach(400, 400, cast(enemies));
 		roach.state = this;
 		add(roach);
 

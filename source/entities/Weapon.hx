@@ -13,6 +13,7 @@ import entities.Bullet;
 
 class Weapon extends FlxNestedSprite
 {
+	public var state:PlayState;
 	public var bulletArray:FlxTypedGroup<Bullet>;
 
 	public function new(?X:Float=0, ?Y:Float=0) {
@@ -23,16 +24,23 @@ class Weapon extends FlxNestedSprite
 	}
 
 	public function fire(angle:Float) {
-		var newBullet = new Bullet(this.x, this.y, 500, angle, 10);
-		bulletArray.add(newBullet);
+		var newBullet = new Bullet(this.x, this.y, 500, angle, 10, cast(bulletArray));
 	}
 
 	override public function update(delta:Float) {
 
 		for (b in bulletArray) {
+
 			if (b.isTouching(FlxObject.ANY) || !b.isOnScreen()) {
-				bulletArray.remove(b);
-				b.destroy();
+				b.kill();
+				continue;
+			}
+			
+			for (e in state.enemies) {
+				if (b.overlaps(e)) {
+					b.hit(e);
+					break;
+				}
 			}
 		}
 
