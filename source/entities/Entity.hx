@@ -4,24 +4,29 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.group.FlxGroup;
+import flixel.group.FlxSpriteGroup;
 
 import flixel.addons.display.FlxNestedSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
-class Entity extends FlxNestedSprite {
+class Entity extends flixel.group.FlxSpriteGroup {
 	private var moving:Bool;
 	private var moveAngle:Float;
 
 	private var moveSpeed:Int = 200;
 	public var state:PlayState;
 
-	public var group:FlxGroup;
+	public var sprite:FlxSprite;
+
+	public var parentGroup:FlxGroup;
 
 	public function new(X:Float=0, Y:Float=0, ?Group:FlxGroup) {
 		super(X, Y);
-		group = Group;
-		if (group != null) {
-			group.add(this);
+		sprite = new FlxSprite();
+		add(sprite);
+		parentGroup = Group;
+		if (parentGroup != null) {
+			parentGroup.add(this);
 		}
 	}
 
@@ -37,9 +42,9 @@ class Entity extends FlxNestedSprite {
 	}
 
 	override public function kill() {
-		if (group != null)
+		if (parentGroup != null)
 		{
-			group.remove(this);
+			parentGroup.remove(this);
 		}
 
 		destroy();

@@ -20,25 +20,37 @@ class Player extends Entity
 
 	public var playerWeapon:Weapon;
 
+	public var center:FlxSprite;
+
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
 		super(X, Y);
 		state = playState;
 		this.health = 10;
-		loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+		sprite.loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-		animation.add('idle', [0,1,2,3,4,5,6,7,8,9,10], 8);
-		animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
-		animation.play('idle');
+		sprite.animation.add('idle', [0,1,2,3,4,5,6,7,8,9,10], 8);
+		sprite.animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
+		sprite.animation.play('idle');
 
 		playerWeapon = new PeaShooter();
 		playerWeapon.solid = false;
 		playerWeapon.state = state;
 		add(playerWeapon);
+
+		center = new FlxSprite();
+		center.makeGraphic(1, 1, FlxColor.TRANSPARENT);
+		center.setPosition(50, 43);
+		add(center);
 	}
 
 	public function setMoving(moving:Bool) {
 		this.moving = moving;
+		if (moving) {
+			sprite.animation.play('walk');
+		} else {
+			sprite.animation.play('idle');
+		}
 	}
 
 	public function setMoveAngle(moveAngle:Float) {
@@ -52,7 +64,7 @@ class Player extends Entity
 
 	override public function update(delta:Float)
 	{
-		playerWeapon.relativeAngle = FlxAngle.angleBetweenMouse(this, true);
+		playerWeapon.angle = FlxAngle.angleBetweenMouse(center, true);
 
 		if (this.moving) {
 			velocity.set(this.moveSpeed, 0);

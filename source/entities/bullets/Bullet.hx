@@ -28,7 +28,7 @@ class Bullet extends entities.Entity
 	    angle = Direction;
 	    damage = Damage;
 
-	    loadGraphic(AssetPaths.pea_shooter_bullet__png, false, 61, 44);
+	    sprite.loadGraphic(AssetPaths.pea_shooter_bullet__png, false, 61, 44);
 	}
 
 	override public function destroy():Void

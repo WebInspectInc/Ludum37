@@ -1,5 +1,6 @@
 package entities;
 
+import flixel.FlxSprite;
 import flixel.util.FlxColor;
 
 import entities.*;
@@ -10,7 +11,7 @@ class CounterSpawner extends Entity {
 		super(X, Y);
 		state = State;
 
-		makeGraphic(32, 16, FlxColor.RED);
+		sprite.makeGraphic(32, 16, FlxColor.RED);
 	}
 
 	public function spawn() {

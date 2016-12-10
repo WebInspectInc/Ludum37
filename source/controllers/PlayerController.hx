@@ -66,10 +66,8 @@ class PlayerController
 		if (_up || _down || _left || _right) {
 			playerEntity.setMoving(true);
 			playerEntity.setMoveAngle(mA);
-			playerEntity.animation.play('walk');
 		} else {
 			playerEntity.setMoving(false);
-			playerEntity.animation.play('idle');
 		}
 
 		if (_fire) {
