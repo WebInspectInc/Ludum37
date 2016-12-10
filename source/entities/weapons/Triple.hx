@@ -1,6 +1,8 @@
 package entities.weapons;
 
 import flixel.util.FlxColor;
+import flixel.FlxG;
+import flixel.system.FlxSound;
 
 import entities.bullets.*;
 
@@ -10,6 +12,8 @@ class Triple extends Weapon {
 
 	private static inline var SPRITE_HEIGHT:Int = 58;
 	private static inline var SPRITE_WIDTH:Int = 100;
+
+	private var fireSound:FlxSound = FlxG.sound.load(AssetPaths.biggun__wav, .2);
 
 	public function new(?X:Float=0, ?Y:Float=0) {
 		super(X, Y);
@@ -31,6 +35,8 @@ class Triple extends Weapon {
 			var newBullet = new Bullet(this.x, this.y, state, 500, angle, 10, cast(state.playerBullets));
 			var newBullet = new Bullet(this.x, this.y, state, 500, angle + 10, 10, cast(state.playerBullets));
 			var newBullet = new Bullet(this.x, this.y, state, 500, angle - 10, 10, cast(state.playerBullets));
+			fireSound.play(true);
+			FlxG.camera.shake(0.01, 0.15);
 		}
 
 	}

@@ -19,7 +19,7 @@ class Bullet extends entities.Entity
 	private static inline var SPRITE_WIDTH:Int = 61;
 
 	private var damage:Float;
-	private var explosionSound:FlxSound = FlxG.sound.load(AssetPaths.explosion_short__wav);
+	private var explosionSound:FlxSound = FlxG.sound.load(AssetPaths.explosion_short__wav, .2);
 
 	public function new(X:Float, Y:Float, State:PlayState, Speed:Int, Direction:Float, Damage:Float, Group:FlxGroup)
 	{
