@@ -11,6 +11,8 @@ import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.ui.FlxBar;
 import flixel.group.FlxGroup;
 import flixel.math.FlxRandom;
+import flixel.system.FlxSound;
+import flixel.system.FlxAssets;
 
 import entities.*;
 import entities.weapons.*;
@@ -25,6 +27,10 @@ class PlayState extends FlxState
 	public var player:Player;
 	private var level:LevelState;
 	private var barriers:Barriers;
+
+	private static var mainTheme:FlxSoundAsset = AssetPaths.strategyTheme__wav;
+	private static var actionTheme:FlxSoundAsset = AssetPaths.shootingTheme__wav;
+	public var musicPlaying:FlxSoundAsset = mainTheme;
 
 	public var enemies:FlxTypedGroup<Entity>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
@@ -72,21 +78,30 @@ class PlayState extends FlxState
 		add(healthBar);
 
 		if (FlxG.sound.music == null) {
-			FlxG.sound.playMusic(AssetPaths.strategyTheme__wav, 1, true);
+			FlxG.sound.playMusic(mainTheme, 1, true);
+			musicPlaying = mainTheme;
 		}
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		trace(enemies.countLiving());
 		this.playerController.update();
-		spawnTimer -= elapsed;
-		if (spawnTimer <= 0) {
-			spawnTimer = 3;
-			var spawners = counterSpawners.members;
-			new FlxRandom().shuffle(spawners);
-			for (spawner in spawners) {
-				spawner.spawn();
+
+		if (enemies.countLiving() <= 0) {
+			if (musicPlaying != mainTheme) {
+				FlxG.sound.playMusic(mainTheme, 1, true);
+				musicPlaying = mainTheme;
+			}
+			spawnTimer -= elapsed;
+			if (spawnTimer <= 0) {
+				spawnTimer = 12;
+				var spawners = counterSpawners.members;
+				new FlxRandom().shuffle(spawners);
+				for (spawner in spawners) {
+					spawner.spawn();
+				}
+				FlxG.sound.playMusic(actionTheme, 1, true);
+				musicPlaying = actionTheme;
 			}
 		}
 		barriers.update(elapsed);
