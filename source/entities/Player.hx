@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
+import flixel.math.FlxAngle;
 
 import flixel.group.FlxGroup;
 
@@ -14,15 +15,15 @@ import entities.bullets.*;
 
 class Player extends Entity
 {
-	private static inline var SPRITE_HEIGHT:Int = 200;
-	private static inline var SPRITE_WIDTH:Int = 171;
+	private static inline var SPRITE_HEIGHT:Int = 100;
+	private static inline var SPRITE_WIDTH:Int = 85;
 
 	public var playerWeapon:Weapon;
 
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
-		state = playState;
 		super(X, Y);
+		state = playState;
 		this.health = 10;
 		loadGraphic(AssetPaths.gnome__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 
@@ -30,9 +31,7 @@ class Player extends Entity
 		animation.add('walk', [12,13,14,15,16,17,18,19,20,21,22], 4);
 		animation.play('idle');
 
-		scale.set(0.5, 0.5);
-
-		playerWeapon = new Weapon();
+		playerWeapon = new PeaShooter();
 		playerWeapon.solid = false;
 		playerWeapon.state = state;
 		add(playerWeapon);
@@ -48,11 +47,13 @@ class Player extends Entity
 
 	public function useWeapon(angle:Float)
 	{
-		playerWeapon.fire(angle);
+		playerWeapon.fire();
 	}
 
 	override public function update(delta:Float)
 	{
+		playerWeapon.relativeAngle = FlxAngle.angleBetweenMouse(this, true);
+
 		if (this.moving) {
 			velocity.set(this.moveSpeed, 0);
 			velocity.rotate(FlxPoint.weak(0, 0), this.moveAngle);

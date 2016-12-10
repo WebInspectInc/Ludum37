@@ -11,7 +11,7 @@ class Triple extends Weapon {
 		makeGraphic(8, 8, FlxColor.YELLOW);
 	}
 
-	override public function fire(angle:Float) {
+	override public function fire() {
 		var newBullet = new Bullet(this.x, this.y, state, 500, angle, 10, cast(state.playerBullets));
 		var newBullet = new Bullet(this.x, this.y, state, 500, angle + 10, 10, cast(state.playerBullets));
 		var newBullet = new Bullet(this.x, this.y, state, 500, angle - 10, 10, cast(state.playerBullets));

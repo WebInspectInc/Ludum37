@@ -13,6 +13,9 @@ import flixel.addons.display.FlxNestedSprite;
 
 class Bullet extends entities.Entity
 {
+	private static inline var SPRITE_HEIGHT:Int = 44;
+	private static inline var SPRITE_WIDTH:Int = 61;
+
 	private var damage:Float;
 
 	public function new(X:Float, Y:Float, State:PlayState, Speed:Int, Direction:Float, Damage:Float, Group:FlxGroup)
@@ -22,9 +25,10 @@ class Bullet extends entities.Entity
 	    moving = true;
 	    moveSpeed = Speed;
 	    moveAngle = Direction;
+	    angle = Direction;
 	    damage = Damage;
 
-	    makeGraphic(16, 16, FlxColor.GREEN);
+	    loadGraphic(AssetPaths.pea_shooter_bullet__png, false, 61, 44);
 	}
 
 	override public function destroy():Void
