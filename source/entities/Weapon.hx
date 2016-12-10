@@ -22,8 +22,8 @@ class Weapon extends FlxNestedSprite
 		bulletArray = new FlxTypedGroup<Bullet>();
 	}
 
-	public function fire() {
-		var newBullet = new Bullet(this.x, this.y, 500, FlxObject.RIGHT, 10);
+	public function fire(angle:Float) {
+		var newBullet = new Bullet(this.x, this.y, 500, angle, 10);
 		bulletArray.add(newBullet);
 	}
 

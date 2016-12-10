@@ -36,9 +36,9 @@ class Player extends Entity
 		this.moveAngle = moveAngle;
 	}
 
-	public function useWeapon()
+	public function useWeapon(angle:Float)
 	{
-		playerWeapon.fire();
+		playerWeapon.fire(angle);
 	}
 
 	override public function update(delta:Float)

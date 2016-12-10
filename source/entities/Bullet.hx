@@ -5,40 +5,23 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.FlxObject;
+import entities.Entity;
 
 import flixel.addons.display.FlxNestedSprite;
 
-class Bullet extends FlxNestedSprite
+class Bullet extends entities.Entity
 {
-	private var speed:Float;
-	private var direction:Int;
 	private var damage:Float;
 
-	public function new(X:Float, Y:Float, Speed:Float, Direction:Int, Damage:Float)
+	public function new(X:Float, Y:Float, Speed:Int, Direction:Float, Damage:Float)
 	{
 	    super(X,Y);
-	    speed = Speed;
-	    direction = Direction;
+	    moving = true;
+	    moveSpeed = Speed;
+	    moveAngle = Direction;
 	    damage = Damage;
 
 	    makeGraphic(4, 4, FlxColor.GREEN);
-	}
-
-	override public function update(delta:Float) {
-	    super.update(delta);
-	    if (direction == FlxObject.LEFT){
-	        velocity.x = -speed;     
-	    }
-	    if (direction == FlxObject.RIGHT){
-	        velocity.x = speed;     
-	    }
-	    if (direction == FlxObject.FLOOR){
-	        velocity.y = speed;     
-	    }
-	    if (direction == FlxObject.CEILING){
-	        velocity.y = -speed;     
-	    }
-	    
 	}
 
 	override public function destroy():Void

@@ -67,7 +67,7 @@ class PlayerController
 		}
 
 		if (_fire) {
-			playerEntity.useWeapon();
+			playerEntity.useWeapon(FlxAngle.angleBetweenMouse(this.playerEntity, true));
 		}
 	}
 }
