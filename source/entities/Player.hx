@@ -13,6 +13,7 @@ import flixel.group.FlxGroup;
 import entities.Entity;
 import entities.weapons.*;
 import entities.bullets.*;
+import entities.placeable.*;
 
 class Player extends Entity
 {
@@ -22,6 +23,8 @@ class Player extends Entity
 	public var playerWeapon:Weapon;
 
 	public var center:FlxNestedSprite;
+
+	public var placing:Placeable;
 
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
@@ -69,7 +72,7 @@ class Player extends Entity
 
 	override public function update(delta:Float)
 	{
-		playerWeapon.relativeAngle = FlxAngle.angleBetweenMouse(center, true);
+		playerWeapon.relativeAngle = angleToMouse();
 
 		if (this.moving) {
 			velocity.set(this.moveSpeed, 0);
@@ -77,6 +80,8 @@ class Player extends Entity
 		} else {
 			velocity.set(0, 0);
 		}
+
+		movePlacing();
 
 		super.update(delta);
 	}
@@ -97,5 +102,41 @@ class Player extends Entity
 		add(weapon);
 		weapon.solid = false;
 		playerWeapon = weapon;
+	}
+
+	public function angleToMouse():Float {
+		return FlxAngle.angleBetweenMouse(center, true);
+	}
+
+	public function place() {
+		var barrier = new CookieBarrier(0, 0, cast(state.placedObjects), state);
+		placing = barrier;
+		movePlacing();
+	}
+
+	public function movePlacing() {
+		if (placing == null) return;
+		var angle = angleToMouse();
+		var dir = FlxAngle.getCartesianCoords(1, angle);
+
+		dir.x = Math.round(dir.x) * 170;
+		dir.y = Math.round(dir.y) * 170;
+
+		var hitbox = placing.getHitbox();
+
+		var pos = new FlxPoint();
+		if (Math.abs(dir.y) > Math.abs(dir.x)) {
+			pos.x = center.x - placing.height / 2;
+			pos.y = center.y + dir.y - placing.width / 2;
+		} else {
+			pos.x = center.x + dir.x - placing.width / 2;
+			pos.y = center.y - placing.height / 2;
+		}
+		placing.setPosition(pos.x, pos.y);
+	}
+
+	public function setDown() {
+		placing.setDown();
+		placing = null;
 	}
 }

@@ -17,6 +17,7 @@ import flixel.system.FlxAssets;
 import entities.*;
 import entities.weapons.*;
 import entities.bullets.*;
+import entities.placeable.*;
 import controllers.PlayerController;
 
 import Wave;
@@ -36,24 +37,26 @@ class PlayState extends FlxState
 	public var playerBullets:FlxTypedGroup<Bullet>;
 	public var groundWeapons:FlxTypedGroup<Weapon>;
 	public var counterSpawners:FlxTypedGroup<CounterSpawner>;
+	public var placedObjects:FlxTypedGroup<Placeable>;
 
 	public var currentWave:Wave;
 	public var waveNumber:Int = 0;
 
-	public var spawnTimer:Float = 2;
+	public var spawnTimer:Float = 6;
 
 	override public function create():Void
 	{
 		counterSpawners = new FlxTypedGroup<CounterSpawner>();
 		level = new LevelState(this);
 		add(level);
+		add(counterSpawners);
+		placedObjects = new FlxTypedGroup<Placeable>();
+		add(placedObjects);
 		enemies = new FlxTypedGroup<Entity>();
 		playerBullets = new FlxTypedGroup<Bullet>();
 		add(playerBullets);
 		groundWeapons = new FlxTypedGroup<Weapon>();
 		add(groundWeapons);
-		add(counterSpawners);
-
 
 		super.create();
 
@@ -68,7 +71,7 @@ class PlayState extends FlxState
 
 		playerController = new PlayerController(this.player);
 
-		barriers = new Barriers(this, player);
+		// barriers = new Barriers(this, player);
 
 		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
@@ -104,12 +107,11 @@ class PlayState extends FlxState
 				musicPlaying = actionTheme;
 			}
 		}
-		barriers.update(elapsed);
 
-		FlxG.collide(player, barriers.walls);
-		FlxG.collide(enemies, barriers.walls);
+		FlxG.collide(player, placedObjects);
+		FlxG.collide(enemies, placedObjects);
 		FlxG.collide(enemies, enemies);
-		FlxG.overlap(playerBullets, barriers.walls, destroyBullet);
+		FlxG.overlap(playerBullets, placedObjects, destroyBullet);
 
 		super.update(elapsed);
 	}
