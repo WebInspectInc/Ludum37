@@ -6,6 +6,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
+import flixel.util.FlxColor;
 
 import entities.Player;
 import controllers.PlayerController;
@@ -14,9 +15,13 @@ class PlayState extends FlxState
 {
 	private var playerController:PlayerController;
 	private var player:Player;
-
+	private static var level:LevelState;
 	override public function create():Void
 	{
+		level = new LevelState(this);
+
+		add(level);
+
 		super.create();
 
 		this.player = new Player();
