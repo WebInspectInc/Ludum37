@@ -42,7 +42,7 @@ class PlayState extends FlxState
 
 		super.create();
 
-		player = new Player(this);
+		player = new Player(this, 500, 500);
 		add(player);
 
 		var triple = new Triple(500, 600);
@@ -75,7 +75,7 @@ class PlayState extends FlxState
 		FlxG.collide(player, barriers.walls);
 		FlxG.collide(enemies, barriers.walls);
 		FlxG.collide(enemies, enemies);
-		FlxG.overlap(player.playerWeapon.bulletArray, barriers.walls, destroyBullet);
+		FlxG.overlap(playerBullets, barriers.walls, destroyBullet);
 
 		super.update(elapsed);
 	}

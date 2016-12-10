@@ -17,6 +17,7 @@ class Cockroach extends Entity {
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
 		makeGraphic(16, 16, FlxColor.ORANGE);
+		health = 20;
 
 		this.moveSpeed = 100;
 
