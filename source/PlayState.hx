@@ -72,6 +72,10 @@ class PlayState extends FlxState
 		var healthBar = new FlxBar(7, 7, LEFT_TO_RIGHT, 100, 20, player, "health", 0, 10, true);
 		healthBar.scrollFactor.set(0, 0);
 		add(healthBar);
+
+		if (FlxG.sound.music == null) {
+			FlxG.sound.playMusic(AssetPaths.strategyTheme__wav, 1, true);
+		}
 	}
 
 	override public function update(elapsed:Float):Void

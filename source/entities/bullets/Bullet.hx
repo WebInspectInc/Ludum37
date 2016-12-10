@@ -1,7 +1,9 @@
 package entities.bullets;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.FlxObject;
@@ -17,6 +19,7 @@ class Bullet extends entities.Entity
 	private static inline var SPRITE_WIDTH:Int = 61;
 
 	private var damage:Float;
+	private var explosionSound:FlxSound = FlxG.sound.load(AssetPaths.explosion_short__wav);
 
 	public function new(X:Float, Y:Float, State:PlayState, Speed:Int, Direction:Float, Damage:Float, Group:FlxGroup)
 	{
@@ -33,12 +36,13 @@ class Bullet extends entities.Entity
 
 	override public function destroy():Void
 	{
-	    super.destroy();
+		super.destroy();
 	}
 
 	public function hit(e:Entity) {
 		e.hurt(damage);
 		kill();
+		explosionSound.play();
 	}
 
 	override public function update(delta:Float) {

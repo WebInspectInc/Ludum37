@@ -1,11 +1,15 @@
 package entities.weapons;
 
+import flixel.FlxG;
+import flixel.system.FlxSound;
 import entities.bullets.Bullet;
 
 class PeaShooter extends Weapon {
 
 	private static inline var SPRITE_HEIGHT:Int = 26;
 	private static inline var SPRITE_WIDTH:Int = 100;
+
+	private var fireSound:FlxSound = FlxG.sound.load(AssetPaths.peashooter__wav);
 	
 	public function new(?X:Float=0, ?Y:Float=0) {
 		super(X, Y);
@@ -13,9 +17,17 @@ class PeaShooter extends Weapon {
 		origin.set(SPRITE_WIDTH * 0.25, SPRITE_HEIGHT * 0.5);
 		offset.set(-30, -60);
 		solid = true;
+
 	}
 
 	override public function fire() {
 		var newBullet = new Bullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
+		fireSound.play(true);
+	}
+
+	override public function destroy():Void
+	{
+	    super.destroy();
+	    fireSound.play(true);
 	}
 }
