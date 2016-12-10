@@ -24,6 +24,7 @@ class Player extends Entity
 		makeGraphic(16, 16, FlxColor.RED);
 
 		playerWeapon = new Weapon();
+		playerWeapon.state = state;
 		add(playerWeapon);
 		state.add(playerWeapon.bulletArray);
 	}
