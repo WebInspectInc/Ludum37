@@ -42,7 +42,7 @@ class PlayState extends FlxState
 	public var currentWave:Wave;
 	public var waveNumber:Int = 0;
 
-	public var spawnTimer:Float = 200;
+	public var spawnTimer:Float = 6;
 
 	override public function create():Void
 	{
@@ -107,7 +107,6 @@ class PlayState extends FlxState
 				musicPlaying = actionTheme;
 			}
 		}
-		// barriers.update(elapsed);
 
 		FlxG.collide(player, placedObjects);
 		FlxG.collide(enemies, placedObjects);
