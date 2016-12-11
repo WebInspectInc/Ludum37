@@ -15,9 +15,7 @@ class AntBomb extends Enemy {
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
 		customMovement = true;
-		makeGraphic(60, 40, FlxColor.BLUE);
-
-		setSize(56, 37);
+		loadGraphic(AssetPaths.Roach_egg__png);
 
 		health = 60;
 
@@ -47,9 +45,9 @@ class AntBomb extends Enemy {
 
 		timer -= delta;
 		if (timer <= 0) {
-			for (i in 0...16) {
+			for (i in 0...8) {
 				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
-				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i > 13);
+				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i < 2);
 				enemy.state = state;
 				state.add(enemy);
 			}

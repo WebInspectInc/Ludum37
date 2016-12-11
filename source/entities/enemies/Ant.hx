@@ -12,8 +12,10 @@ import flixel.FlxG;
 import entities.Entity;
 
 class Ant extends Enemy {
-	private static inline var SPRITE_HEIGHT:Int = 105;
 	private static inline var SPRITE_WIDTH:Int = 102;
+	private static inline var SPRITE_HEIGHT:Int = 105;
+	private static inline var SUPER_SPRITE_WIDTH:Int = 105;
+	private static inline var SUPER_SPRITE_HEIGHT:Int = 103;
 
 	private var accelerationSpeed:Int = 1000;
 
@@ -29,7 +31,16 @@ class Ant extends Enemy {
 		} else {
 			isSuperAnt = true;
 		}
-		loadGraphic(AssetPaths.ant_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+
+		if (isSuperAnt) {
+			health = 20;
+			this.moveSpeed = 400;
+			loadGraphic(AssetPaths.super_ant_walk__png, true, SUPER_SPRITE_WIDTH, SUPER_SPRITE_HEIGHT);
+		} else {
+			health = 10;
+			this.moveSpeed = 200;
+			loadGraphic(AssetPaths.ant_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+		}
 
 		animation.add('walk', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25], 25);
 		animation.play('walk');
@@ -37,13 +48,7 @@ class Ant extends Enemy {
 		setSize(52, 37);
 		offset.set(21, 33);
 
-		health = 10;
-		this.moveSpeed = 200;
 		
-		if (isSuperAnt) {
-			health = 20;
-			this.moveSpeed = 400;
-		}
 
 		var rnd = new FlxRandom();
 		randomPoint = new FlxPoint(500, 500);
