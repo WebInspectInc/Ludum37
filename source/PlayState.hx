@@ -44,6 +44,7 @@ class PlayState extends FlxState
 	public var waveNumber:Int = 0;
 
 	public var spawnTimer:Float = 6;
+	public var resetSpawn:Bool = true;
 
 	override public function create():Void
 	{
@@ -108,7 +109,11 @@ class PlayState extends FlxState
 			spawnSpawn();
 		}
 
-		if (enemies.countLiving() <= 0 && currentWave.isWaveComplete()) {
+		if (enemies.countLiving() <= 0 && currentWave.isWaveComplete() && resetSpawn) {
+			spawnTimer = 6;
+			waveNumber += 1;
+			currentWave = Wave.getWave(waveNumber);
+			resetSpawn = false;
 			if (musicPlaying != mainTheme) {
 				FlxG.sound.playMusic(mainTheme, 1, true);
 				musicPlaying = mainTheme;
@@ -129,6 +134,8 @@ class PlayState extends FlxState
 		var center = new FlxPoint(600, 475);
 		var random = FlxG.random;
 		var location = FlxAngle.getCartesianCoords(random.int(1000, 1100), random.int(0, 360), center);
+
+		resetSpawn = true;
 
 		var newEnemies = currentWave.nextGroup(cast(enemies));
 		if (newEnemies != null) {
