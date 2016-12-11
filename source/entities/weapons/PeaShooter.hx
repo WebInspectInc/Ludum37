@@ -24,16 +24,30 @@ class PeaShooter extends Weapon {
 
 	override public function update(delta:Float) {
 		cooldown -= delta;
+
+		reloadTimer -= delta;
+
+		if (reloadTimer <= 0 && ammo < 15) {
+			ammo += 1;
+			reloadTimer = 0.1;
+		}
+
 		super.update(delta);
 	}
 
 	override public function fire() {
-		if (cooldown <= 0) {
+		if (cooldown <= 0 && ammo > 0) {
+
+			reloadTimer = 1;
+			ammo -= 1;
+
 			cooldown = 0.17;
 			var newBullet = new PeaBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
 
 			fireSound.play(true);
 			FlxG.camera.shake(0.002, 0.15);
 		}
+
+		super.fire();
 	}
 }

@@ -13,6 +13,8 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxRandom;
 import flixel.system.FlxSound;
 import flixel.system.FlxAssets;
+import flixel.math.FlxAngle;
+import flixel.math.FlxPoint;
 
 import entities.*;
 import entities.weapons.*;
@@ -27,7 +29,6 @@ class PlayState extends FlxState
 	private var playerController:PlayerController;
 	public var player:Player;
 	private var level:LevelState;
-	private var barriers:Barriers;
 
 	private static var mainTheme:FlxSoundAsset = AssetPaths.strategyTheme__wav;
 	private static var actionTheme:FlxSoundAsset = AssetPaths.shootingTheme__wav;
@@ -36,7 +37,6 @@ class PlayState extends FlxState
 	public var enemies:FlxTypedGroup<Entity>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
 	public var groundWeapons:FlxTypedGroup<Weapon>;
-	public var counterSpawners:FlxTypedGroup<CounterSpawner>;
 	public var placedObjects:FlxTypedGroup<Placeable>;
 
 	public var currentWave:Wave;
@@ -46,10 +46,8 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
-		counterSpawners = new FlxTypedGroup<CounterSpawner>();
 		level = new LevelState(this);
 		add(level);
-		add(counterSpawners);
 		placedObjects = new FlxTypedGroup<Placeable>();
 		add(placedObjects);
 		enemies = new FlxTypedGroup<Entity>();
@@ -75,14 +73,16 @@ class PlayState extends FlxState
 
 		playerController = new PlayerController(this.player);
 
-		// barriers = new Barriers(this, player);
-
 		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
 
 		var healthBar = new FlxBar(7, 7, LEFT_TO_RIGHT, 100, 20, player, "health", 0, 10, true);
 		healthBar.scrollFactor.set(0, 0);
 		add(healthBar);
+
+		var ammoBar = new FlxBar(7, 34, LEFT_TO_RIGHT, 100, 5, player.playerWeapon, "ammo", 0, 15, false);
+		ammoBar.scrollFactor.set(0, 0);
+		add(ammoBar);
 
 		if (FlxG.sound.music == null) {
 			FlxG.sound.playMusic(mainTheme, 1, true);
@@ -94,21 +94,15 @@ class PlayState extends FlxState
 	{
 		this.playerController.update();
 
-		if (enemies.countLiving() <= 0) {
+		spawnTimer -= elapsed;
+		if (spawnTimer <= 0) {
+			spawnSpawn();
+		}
+
+		if (enemies.countLiving() <= 0 && currentWave.isWaveComplete()) {
 			if (musicPlaying != mainTheme) {
 				FlxG.sound.playMusic(mainTheme, 1, true);
 				musicPlaying = mainTheme;
-			}
-			spawnTimer -= elapsed;
-			if (spawnTimer <= 0) {
-				spawnTimer = 12;
-				var spawners = counterSpawners.members.copy();
-				FlxG.random.shuffle(spawners);
-				for (spawner in spawners) {
-					spawner.spawn();
-				}
-				FlxG.sound.playMusic(actionTheme, 1, true);
-				musicPlaying = actionTheme;
 			}
 		}
 
@@ -118,6 +112,31 @@ class PlayState extends FlxState
 		FlxG.overlap(playerBullets, placedObjects, destroyBullet);
 
 		super.update(elapsed);
+	}
+
+	public function spawnSpawn() {
+		spawnTimer = 1;
+
+		var center = new FlxPoint(600, 475);
+		var random = FlxG.random;
+		var location = FlxAngle.getCartesianCoords(random.int(1000, 1100), random.int(0, 360), center);
+		trace(location);
+		trace("player");
+		trace(player.getPosition());
+
+		var enemies = currentWave.nextGroup(cast(enemies));
+		if (enemies != null) {
+			for (enemy in enemies) {
+				enemy.state = this;
+				enemy.setPosition(enemy.x + location.x, enemy.y + location.y);
+				add(enemy);
+			}
+		}
+
+		if (musicPlaying != actionTheme) {
+			FlxG.sound.playMusic(actionTheme, 1, true);
+			musicPlaying = actionTheme;
+		}
 	}
 
 	function destroyBullet(bullet:Bullet, wall:FlxSprite):Void {

@@ -30,7 +30,7 @@ class Ant extends Entity {
 		setSize(52, 37);
 		offset.set(21, 33);
 
-		health = 20;
+		health = 10;
 
 		this.moveSpeed = 200;
 
