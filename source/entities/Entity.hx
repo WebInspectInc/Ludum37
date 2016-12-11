@@ -13,7 +13,7 @@ class Entity extends FlxNestedSprite {
 	private var moving:Bool;
 	private var moveAngle:Float;
 
-	private var moveSpeed:Int = 200;
+	public var moveSpeed:Int = 200;
 	public var state:PlayState;
 
 	public var parentGroup:FlxGroup;

@@ -20,7 +20,6 @@ class PeaShooter extends Weapon {
 		origin.set(SPRITE_WIDTH * 0.25, SPRITE_HEIGHT * 0.5);
 		offset.set(-30, -60);
 		solid = true;
-
 	}
 
 	override public function update(delta:Float) {
