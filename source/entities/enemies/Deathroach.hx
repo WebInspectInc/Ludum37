@@ -6,19 +6,26 @@ import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.math.FlxAngle;
 import flixel.group.FlxGroup;
+import flixel.addons.display.FlxNestedSprite;
 import entities.Entity;
 
 import entities.enemies.AntBomb;
 
 class Deathroach extends Enemy {
+	private static inline var SPRITE_WIDTH:Int = 409;
 	private static inline var SPRITE_HEIGHT:Int = 404;
-	private static inline var SPRITE_WIDTH:Int = 402;
+
+	private static inline var BOOM_WIDTH:Int = 405;
+	private static inline var BOOM_HEIGHT:Int = 265;
+
 
 	private var accelerationSpeed:Int = 500;
 
 	private var attackCooldown:Float = 0;
 
 	private var eggTimer:Float = 15;
+
+	private var boomSprite:FlxNestedSprite;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
@@ -36,6 +43,10 @@ class Deathroach extends Enemy {
 
 		this.maxVelocity = new FlxPoint(150, 150);
 		this.moving = true;
+
+		boomSprite = new FlxNestedSprite();
+		boomSprite.loadGraphic(AssetPaths.boom__png, true, BOOM_WIDTH, BOOM_HEIGHT);
+		boomSprite.animation.add("boom", [0,1,2,3,4,5,6,7,8], 20, false);
 	}
 
 	override public function update(delta: Float) {
@@ -47,6 +58,13 @@ class Deathroach extends Enemy {
 			var bomb = new AntBomb(x, y, cast(state.enemies));
 			bomb.state = state;
 			state.add(bomb);
+
+			add(boomSprite);
+			boomSprite.animation.play("boom");
+		}
+
+		if (boomSprite.animation.finished) {
+			remove(boomSprite);
 		}
 
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
