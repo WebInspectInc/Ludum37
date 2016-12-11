@@ -7,7 +7,7 @@ import flixel.FlxG;
 
 class AntBomb extends Enemy {
 	
-	public var timer:Float = 8;
+	public var timer:Float = 5;
 	public var z:Float = 0;
 	public var zVel:Float;
 	public var grounded:Bool = false;
@@ -40,13 +40,12 @@ class AntBomb extends Enemy {
 				zVel = 0;
 				velocity.set(0, 0);
 				grounded = true;
-				timer -= 5;
 			}
 		}
 
 		timer -= delta;
 		if (timer <= 0) {
-			for (i in 0...7) {
+			for (i in 0...5) {
 				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
 				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i < 1);
 				enemy.state = state;
