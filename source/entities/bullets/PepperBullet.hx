@@ -22,7 +22,7 @@ class PepperBullet extends Bullet {
 
 	public function explode() {
 		var ex = new Explosion(x, y, state, 0, 0, 50, cast(state.playerBullets));
-		FlxG.camera.shake(0.05, 0.2);
+		FlxG.camera.shake(0.05, 0.1);
 		kill();
 	}
 

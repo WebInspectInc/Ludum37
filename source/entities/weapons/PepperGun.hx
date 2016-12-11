@@ -28,7 +28,7 @@ class PepperGun extends Weapon {
 
 	override public function fire() {
 		if (cooldown <= 0) {
-			cooldown = 0.5;
+			cooldown = 1.4;
 			var newBullet = new PepperBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
 			var newBullet1 = new PepperBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle + 10, 10, cast(state.playerBullets));
 			var newBullet2 = new PepperBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle - 10, 10, cast(state.playerBullets));
