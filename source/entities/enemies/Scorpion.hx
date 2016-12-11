@@ -23,8 +23,8 @@ class Scorpion extends Enemy {
 		animation.play('walk');
 
 		moveSpeed = 130;
-		// setSize(130, 88);
-		// offset.set(41, 86);
+		setSize(52, 37);
+		offset.set(21, 33);
 
 		health = 20;
 
