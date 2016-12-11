@@ -15,12 +15,13 @@ class Entity extends FlxNestedSprite {
 	private var moving:Bool;
 	private var moveAngle:Float;
 
-	public var moveSpeed:Int = 200;
+	public var moveSpeed:Float = 200;
 	public var state:PlayState;
 
 	public var parentGroup:FlxGroup;
 
 	public var corpse:String = null;
+	public var greyCorpse:String = null;
 
 	public function new(X:Float=0, Y:Float=0, ?Group:FlxGroup, ?State:PlayState) {
 		super(X, Y);
@@ -46,7 +47,7 @@ class Entity extends FlxNestedSprite {
 
 	override public function kill() {
 		if (corpse != null) {
-			var corpseEntity = new Corpse(x - offset.x, y - offset.y, corpse);
+			var corpseEntity = new Corpse(x - offset.x, y - offset.y, corpse, greyCorpse);
 			corpseEntity.flipX = flipX;
 			state.corpses.add(corpseEntity);
 		}

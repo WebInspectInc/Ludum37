@@ -54,17 +54,20 @@ class Wave {
 	public static function genWaves():Array<Wave> {
 		if (waves == null) {
 			waves = [
-				new Wave([{enemyClass: Scorpion, enemyCount: 1},
+				new Wave([{enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Ant, enemyCount: 10}
 						  ]),
 				new Wave([{enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Scorpion, enemyCount: 1},
 						  {enemyClass: Scorpion, enemyCount: 2},
-						  {enemyClass: Cockroach, enemyCount: 1}
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Spider, enemyCount: 1}
 						  ]),
 				new Wave([{enemyClass: Deathroach, enemyCount: 1}
 						  ]),
+				new Wave([{enemyClass: Spider, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1}]),
 				new Wave([{enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Deathroach, enemyCount: 1},
 						  {enemyClass: Scorpion, enemyCount: 1},

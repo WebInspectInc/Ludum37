@@ -37,11 +37,13 @@ class Ant extends Enemy {
 			this.moveSpeed = 400;
 			loadGraphic(AssetPaths.super_ant_walk__png, true, SUPER_SPRITE_WIDTH, SUPER_SPRITE_HEIGHT);
 			corpse = AssetPaths.super_ant_corpse__png;
+			greyCorpse = AssetPaths.grey_super_ant_corpse__png;
 		} else {
 			health = 10;
 			this.moveSpeed = 200;
 			loadGraphic(AssetPaths.ant_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 			corpse = AssetPaths.ant_corpse__png;
+			greyCorpse = AssetPaths.grey_ant_corpse__png;
 		}
 
 		animation.add('walk', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25], 25);
