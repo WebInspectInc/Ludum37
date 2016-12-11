@@ -8,6 +8,8 @@ import flixel.math.FlxAngle;
 import flixel.group.FlxGroup;
 import entities.Entity;
 
+import entities.AntBomb;
+
 class Deathroach extends Entity {
 	private static inline var SPRITE_HEIGHT:Int = 404;
 	private static inline var SPRITE_WIDTH:Int = 402;
@@ -15,6 +17,8 @@ class Deathroach extends Entity {
 	private var accelerationSpeed:Int = 500;
 
 	private var attackCooldown:Float = 0;
+
+	private var eggTimer:Float = 15;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
@@ -36,6 +40,14 @@ class Deathroach extends Entity {
 
 	override public function update(delta: Float) {
 		attackCooldown -= delta;
+		eggTimer -= delta;
+
+		if (eggTimer <= 0) {
+			eggTimer = 10;
+			var bomb = new AntBomb(x, y, cast(state.enemies));
+			bomb.state = state;
+			state.add(bomb);
+		}
 
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
 

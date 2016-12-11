@@ -62,7 +62,7 @@ class Wave {
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Ant, enemyCount: 5},
 						  {enemyClass: Ant, enemyCount: 10},
-						  {enemyClass: Ant, enemyCount: 10}
+						  // {enemyClass: Ant, enemyCount: 10}
 						  ])
 			];
 		}
