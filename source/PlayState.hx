@@ -74,6 +74,10 @@ class PlayState extends FlxState
 		baked.state = this;
 		groundWeapons.add(baked);
 
+		var launcher = new Launcher(650, 400);
+		launcher.state = this;
+		groundWeapons.add(launcher);
+
 		currentWave = Wave.getWave(waveNumber);
 
 		playerController = new PlayerController(this.player, level);
