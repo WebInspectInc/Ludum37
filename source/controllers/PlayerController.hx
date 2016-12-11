@@ -75,6 +75,9 @@ class PlayerController
 
 		if (_fire) {
 			playerEntity.useWeapon(FlxAngle.angleBetweenMouse(this.playerEntity, true));
+			playerEntity.firing = true;
+		} else {
+			playerEntity.firing = false;
 		}
 
 		if (_pickup) {

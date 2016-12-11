@@ -28,6 +28,8 @@ class Player extends Entity
 
 	public var placing:Placeable;
 
+	public var firing:Bool = false;
+
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
 		super(X, Y);
@@ -76,6 +78,10 @@ class Player extends Entity
 	override public function update(delta:Float)
 	{
 		playerWeapon.relativeAngle = angleToMouse();
+
+		if (firing) {
+			moveSpeed = MOVE_SPEED * 0.5;
+		}
 
 		if (this.moving) {
 			velocity.set(this.moveSpeed, 0);

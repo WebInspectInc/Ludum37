@@ -16,6 +16,7 @@ class PeaShooter extends Weapon {
 	
 	public function new(?X:Float=0, ?Y:Float=0) {
 		super(X, Y);
+		ammo = 10000;
 		loadGraphic(AssetPaths.pea_shooter__png, false, SPRITE_WIDTH, SPRITE_HEIGHT);
 		origin.set(SPRITE_WIDTH * 0.25, SPRITE_HEIGHT * 0.5);
 		offset.set(-30, -60);
@@ -27,7 +28,7 @@ class PeaShooter extends Weapon {
 
 		reloadTimer -= delta;
 
-		if (reloadTimer <= 0 && ammo < 15) {
+		if (reloadTimer <= 0 && ammo < 1000) {
 			ammo += 1;
 			reloadTimer = 0.1;
 		}
