@@ -65,6 +65,10 @@ class PlayState extends FlxState
 		triple.state = this;
 		groundWeapons.add(triple);
 
+		var pepper = new PepperGun(250, 500);
+		pepper.state = this;
+		groundWeapons.add(pepper);
+
 		currentWave = Wave.getWave(waveNumber);
 
 		playerController = new PlayerController(this.player);
