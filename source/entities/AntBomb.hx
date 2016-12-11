@@ -7,12 +7,14 @@ import flixel.FlxG;
 
 class AntBomb extends Entity {
 	
-	public var timer:Float = 12;
+	public var timer:Float = 8;
 	public var z:Float = 0;
 	public var zVel:Float;
+	public var grounded:Bool = false;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
+		customMovement = true;
 		makeGraphic(60, 40, FlxColor.BLUE);
 
 		setSize(56, 37);
@@ -20,7 +22,7 @@ class AntBomb extends Entity {
 		health = 60;
 
 		zVel = FlxG.random.float(200, 300);
-		velocity.set(FlxG.random.float(50, 100), FlxG.random.float(50, 100));
+		velocity.set(FlxG.random.float(-100, 100), FlxG.random.float(-100, 100));
 	}
 
 	override public function update(delta:Float) {
@@ -28,12 +30,19 @@ class AntBomb extends Entity {
 
 		y = y + z;
 		z += zVel * delta;
-		zVel -= 250 * delta;
+		if (!grounded) {
+			zVel -= 250 * delta;
+		}
 		y = y - z;
 
-		if (z <= 0) {
-			z = 0;
-			zVel = 0;
+		if (!grounded) {		
+			if (z <= 0) {
+				z = 0;
+				zVel = 0;
+				velocity.set(0, 0);
+				grounded = true;
+				timer -= 5;
+			}
 		}
 
 		timer -= delta;
@@ -45,7 +54,7 @@ class AntBomb extends Entity {
 				state.add(enemy);
 			}
 			kill();
+			return;
 		}
-
 	}
 }

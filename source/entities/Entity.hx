@@ -10,6 +10,7 @@ import flixel.addons.display.FlxNestedSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Entity extends FlxNestedSprite {
+	public var customMovement:Bool = false; // Hack to get around entity class :'(
 	private var moving:Bool;
 	private var moveAngle:Float;
 
@@ -28,11 +29,13 @@ class Entity extends FlxNestedSprite {
 	}
 
 	override public function update(delta:Float) {
-		if (this.moving) {
-			velocity.set(this.moveSpeed, 0);
-			velocity.rotate(FlxPoint.weak(0, 0), this.moveAngle);
-		} else {
-			velocity.set(0, 0);
+		if (!customMovement) {
+			if (this.moving) {
+				velocity.set(this.moveSpeed, 0);
+				velocity.rotate(FlxPoint.weak(0, 0), this.moveAngle);
+			} else {
+				velocity.set(0, 0);
+			}
 		}
 
 		super.update(delta);

@@ -120,9 +120,6 @@ class PlayState extends FlxState
 		var center = new FlxPoint(600, 475);
 		var random = FlxG.random;
 		var location = FlxAngle.getCartesianCoords(random.int(1000, 1100), random.int(0, 360), center);
-		trace(location);
-		trace("player");
-		trace(player.getPosition());
 
 		var enemies = currentWave.nextGroup(cast(enemies));
 		if (enemies != null) {
