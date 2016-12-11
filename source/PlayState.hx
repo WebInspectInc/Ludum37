@@ -138,13 +138,13 @@ class PlayState extends FlxState
 	}
 
 	public function createBarriers() {
-		var center = new FlxPoint(600, 475);
+		var center = new FlxPoint(600, 575);
 		var random = FlxG.random;
 		var location = FlxAngle.getCartesianCoords(random.int(400, 400), random.int(0, 400), center);
 
 		var barrier = new CookieBarrier(location.x, location.y, cast(placedObjects), this);
 		barrier.setDown();
-		var barrier1 = new CookieBarrier(center.x + 100, center.y + 100, cast(placedObjects), this);
+		var barrier1 = new CookieBarrier(center.x + 120, center.y + 120, cast(placedObjects), this);
 		barrier1.setDown();
 	}
 
