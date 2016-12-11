@@ -34,7 +34,6 @@ class AntBomb extends Entity {
 		if (z <= 0) {
 			z = 0;
 			zVel = 0;
-			timer = 4;
 		}
 
 		timer -= delta;
