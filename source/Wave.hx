@@ -56,13 +56,13 @@ class Wave {
 			waves = [
 				new Wave([{enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Deathroach, enemyCount: 1},
-						  // {enemyClass: Cockroach, enemyCount: 1},
-						  // {enemyClass: Cockroach, enemyCount: 1},
-						  // {enemyClass: Cockroach, enemyCount: 1},
-						  // {enemyClass: Cockroach, enemyCount: 1},
-						  // {enemyClass: Ant, enemyCount: 5},
-						  // {enemyClass: Ant, enemyCount: 10},
-						  // {enemyClass: Ant, enemyCount: 10}
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Ant, enemyCount: 5},
+						  {enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Ant, enemyCount: 10}
 						  ])
 			];
 		}

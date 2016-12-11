@@ -22,7 +22,7 @@ class AntBomb extends Entity {
 		health = 60;
 
 		zVel = FlxG.random.float(200, 300);
-		velocity.set(FlxG.random.float(-100, 100), FlxG.random.float(-100, 100));
+		velocity.set(FlxG.random.float(-200, 200), FlxG.random.float(-200, 200));
 	}
 
 	override public function update(delta:Float) {
