@@ -58,7 +58,11 @@ class Wave {
 						  {enemyClass: Ant, enemyCount: 10}
 						  ]),
 				new Wave([{enemyClass: Ant, enemyCount: 10},
-						  {enemyClass: Ant, enemyCount: 10}
+						  {enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1}
+						  ]),
+				new Wave([{enemyClass: Deathroach, enemyCount: 1}
 						  ]),
 				new Wave([{enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Deathroach, enemyCount: 1},

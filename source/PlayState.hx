@@ -63,21 +63,21 @@ class PlayState extends FlxState
 		player = new Player(this, 500, 500);
 		add(player);
 
-		var triple = new Triple(500, 600);
-		triple.state = this;
-		groundWeapons.add(triple);
+		// var triple = new Triple(500, 600);
+		// triple.state = this;
+		// groundWeapons.add(triple);
 
-		var pepper = new PepperGun(250, 500);
-		pepper.state = this;
-		groundWeapons.add(pepper);
+		// var pepper = new PepperGun(250, 500);
+		// pepper.state = this;
+		// groundWeapons.add(pepper);
 
-		var baked = new BakedBomb(350, 300);
-		baked.state = this;
-		groundWeapons.add(baked);
+		// var baked = new BakedBomb(350, 300);
+		// baked.state = this;
+		// groundWeapons.add(baked);
 
-		var launcher = new Launcher(650, 400);
-		launcher.state = this;
-		groundWeapons.add(launcher);
+		// var launcher = new Launcher(650, 400);
+		// launcher.state = this;
+		// groundWeapons.add(launcher);
 
 		currentWave = Wave.getWave(waveNumber);
 
@@ -114,6 +114,15 @@ class PlayState extends FlxState
 			waveNumber += 1;
 			currentWave = Wave.getWave(waveNumber);
 			resetSpawn = false;
+
+			createBarriers();
+
+			if (waveNumber == 2) {
+				var pepper = new PepperGun(250, 500);
+				pepper.state = this;
+				groundWeapons.add(pepper);
+			}
+
 			if (musicPlaying != mainTheme) {
 				FlxG.sound.playMusic(mainTheme, 1, true);
 				musicPlaying = mainTheme;
@@ -126,6 +135,17 @@ class PlayState extends FlxState
 		FlxG.overlap(playerBullets, placedObjects, destroyBullet);
 
 		super.update(elapsed);
+	}
+
+	public function createBarriers() {
+		var center = new FlxPoint(600, 475);
+		var random = FlxG.random;
+		var location = FlxAngle.getCartesianCoords(random.int(400, 400), random.int(0, 400), center);
+
+		var barrier = new CookieBarrier(location.x, location.y, cast(placedObjects), this);
+		barrier.setDown();
+		var barrier1 = new CookieBarrier(center.x + 100, center.y + 100, cast(placedObjects), this);
+		barrier1.setDown();
 	}
 
 	public function spawnSpawn() {
