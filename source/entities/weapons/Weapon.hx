@@ -15,14 +15,14 @@ import entities.bullets.Bullet;
 class Weapon extends FlxNestedSprite
 {
 	public var state:PlayState;
+	public var ammo:Int = 15;
+
+	private var reloadTimer:Float = 0;
 
 	override public function update(delta:Float) {
-		// relativeAngle = FlxAngle.angleBetweenMouse(this, true);
-
 		super.update(delta);
 	}
 
 	public function fire() {
-
 	}
 }

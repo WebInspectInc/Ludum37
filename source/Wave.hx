@@ -1,6 +1,7 @@
 package;
 
 import flixel.group.FlxGroup;
+import flixel.math.FlxAngle;
 import entities.*;
 
 typedef WaveData = {enemyClass:Class<Entity>, enemyCount:Int};
@@ -35,11 +36,15 @@ class Wave {
 		groupNumber++;
 		var enemies = new Array<Entity>();
 		for (i in 0...waveGroup.enemyCount) {
-			var x = i * 75;
-			var enemy = Type.createInstance(waveGroup.enemyClass, [x, 0, group]);
+			var pos = FlxAngle.getCartesianCoords(i * 40, i * 120);
+			var enemy = Type.createInstance(waveGroup.enemyClass, [pos.x, pos.y, group]);
 			enemies.push(enemy);
 		}
 		return enemies;
+	}
+
+	public function isWaveComplete():Bool {
+		return groupNumber >= waveData.length;
 	}
 
 	public static function getWave(WaveNumber:Int):Wave {
@@ -50,14 +55,15 @@ class Wave {
 		if (waves == null) {
 			waves = [
 				new Wave([{enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Deathroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Ant, enemyCount: 5},
-						  {enemyClass: Ant, enemyCount: 5},
-						  {enemyClass: Ant, enemyCount: 5},
-						  {enemyClass: Deathroach, enemyCount: 1}])
+						  {enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Ant, enemyCount: 10}
+						  ])
 			];
 		}
 		return waves;
