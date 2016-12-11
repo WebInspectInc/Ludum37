@@ -144,6 +144,7 @@ class PlayState extends FlxState
 		FlxG.collide(enemies, placedObjects);
 		FlxG.collide(enemies, enemies);
 		FlxG.overlap(playerBullets, placedObjects, destroyBullet);
+		FlxG.overlap(evilBullets, placedObjects, destroyBullet);
 		FlxG.overlap(obstacles, player, collideWithObstacle);
 
 		super.update(elapsed);

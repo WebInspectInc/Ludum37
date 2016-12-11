@@ -40,12 +40,11 @@ class Scorpion extends Enemy {
 		}
 
 		var distance = FlxMath.distanceBetween(state.player.center, this);
-		trace(distance);
 
 		moving = true;
-		if (distance > 450) {
+		if (distance > 400) {
 			moveAngle = FlxAngle.angleBetween(this, state.player.center, true);
-		} else if (distance < 300) {
+		} else if (distance < 280) {
 			moveAngle = FlxAngle.angleBetween(state.player.center, this, true);
 		} else {
 			moving = false;
