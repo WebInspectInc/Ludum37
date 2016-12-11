@@ -21,6 +21,8 @@ class Bullet extends entities.Entity
 	private var damage:Float;
 	private var hitEnemies:Array<Entity>;
 
+	public var skipEnemyCheck:Bool = false;
+
 	public function new(X:Float, Y:Float, State:PlayState, Speed:Int, Direction:Float, Damage:Float, Group:FlxGroup)
 	{
 	    super(X, Y, Group);
@@ -38,7 +40,7 @@ class Bullet extends entities.Entity
 	}
 
 	override public function update(delta:Float) {
-		if (isTouching(FlxObject.ANY) || !isOnScreen()) {
+		if ((isTouching(FlxObject.ANY) && !skipEnemyCheck) || !isOnScreen()) {
 			kill();
 			return;
 		}

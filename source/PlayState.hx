@@ -45,6 +45,7 @@ class PlayState extends FlxState
 	public var waveNumber:Int = 0;
 
 	public var spawnTimer:Float = 6;
+	public var resetSpawn:Bool = true;
 
 	override public function create():Void
 	{
@@ -65,17 +66,21 @@ class PlayState extends FlxState
 		player = new Player(this, 500, 500);
 		add(player);
 
-		var triple = new Triple(500, 600);
-		triple.state = this;
-		groundWeapons.add(triple);
+		// var triple = new Triple(500, 600);
+		// triple.state = this;
+		// groundWeapons.add(triple);
 
-		var pepper = new PepperGun(250, 500);
-		pepper.state = this;
-		groundWeapons.add(pepper);
+		// var pepper = new PepperGun(250, 500);
+		// pepper.state = this;
+		// groundWeapons.add(pepper);
 
-		var baked = new BakedBomb(350, 300);
-		baked.state = this;
-		groundWeapons.add(baked);
+		// var baked = new BakedBomb(350, 300);
+		// baked.state = this;
+		// groundWeapons.add(baked);
+
+		// var launcher = new Launcher(650, 400);
+		// launcher.state = this;
+		// groundWeapons.add(launcher);
 
 		currentWave = Wave.getWave(waveNumber);
 
@@ -107,7 +112,20 @@ class PlayState extends FlxState
 			spawnSpawn();
 		}
 
-		if (enemies.countLiving() <= 0 && currentWave.isWaveComplete()) {
+		if (enemies.countLiving() <= 0 && currentWave.isWaveComplete() && resetSpawn) {
+			spawnTimer = 6;
+			waveNumber += 1;
+			currentWave = Wave.getWave(waveNumber);
+			resetSpawn = false;
+
+			createBarriers();
+
+			if (waveNumber == 2) {
+				var pepper = new PepperGun(250, 500);
+				pepper.state = this;
+				groundWeapons.add(pepper);
+			}
+
 			if (musicPlaying != mainTheme) {
 				FlxG.sound.playMusic(mainTheme, 1, true);
 				musicPlaying = mainTheme;
@@ -122,12 +140,25 @@ class PlayState extends FlxState
 		super.update(elapsed);
 	}
 
+	public function createBarriers() {
+		var center = new FlxPoint(600, 575);
+		var random = FlxG.random;
+		var location = FlxAngle.getCartesianCoords(random.int(400, 400), random.int(0, 400), center);
+
+		var barrier = new CookieBarrier(location.x, location.y, cast(placedObjects), this);
+		barrier.setDown();
+		var barrier1 = new CookieBarrier(center.x + 120, center.y + 120, cast(placedObjects), this);
+		barrier1.setDown();
+	}
+
 	public function spawnSpawn() {
 		spawnTimer = 1;
 
 		var center = new FlxPoint(600, 475);
 		var random = FlxG.random;
 		var location = FlxAngle.getCartesianCoords(random.int(1000, 1100), random.int(0, 360), center);
+
+		resetSpawn = true;
 
 		var newEnemies = currentWave.nextGroup(cast(enemies));
 		if (newEnemies != null) {
