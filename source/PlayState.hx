@@ -29,7 +29,6 @@ class PlayState extends FlxState
 	private var playerController:PlayerController;
 	public var player:Player;
 	private var level:LevelState;
-	private var barriers:Barriers;
 
 	private static var mainTheme:FlxSoundAsset = AssetPaths.strategyTheme__wav;
 	private static var actionTheme:FlxSoundAsset = AssetPaths.shootingTheme__wav;
@@ -69,8 +68,6 @@ class PlayState extends FlxState
 		currentWave = Wave.getWave(waveNumber);
 
 		playerController = new PlayerController(this.player);
-
-		// barriers = new Barriers(this, player);
 
 		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
 		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
