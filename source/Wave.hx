@@ -2,9 +2,9 @@ package;
 
 import flixel.group.FlxGroup;
 import flixel.math.FlxAngle;
-import entities.*;
+import entities.enemies.*;
 
-typedef WaveData = {enemyClass:Class<Entity>, enemyCount:Int};
+typedef WaveData = {enemyClass:Class<Enemy>, enemyCount:Int};
 
 class Wave {
 	private static var waves:Array<Wave> = null;
@@ -16,9 +16,9 @@ class Wave {
 		waveData = Data;
 	}
 
-	public function createEnemies(group:FlxGroup):Array<Entity> {
+	public function createEnemies(group:FlxGroup):Array<Enemy> {
 		var y = 0.0;
-		var enemies = new Array<Entity>();
+		var enemies = new Array<Enemy>();
 		for (waveGroup in waveData) {
 			y += 40;
 			for (i in 0...waveGroup.enemyCount) {
@@ -30,11 +30,11 @@ class Wave {
 		return enemies;
 	}
 
-	public function nextGroup(group:FlxGroup):Array<Entity> {
+	public function nextGroup(group:FlxGroup):Array<Enemy> {
 		if (groupNumber >= waveData.length) return null;
 		var waveGroup = waveData[groupNumber];
 		groupNumber++;
-		var enemies = new Array<Entity>();
+		var enemies = new Array<Enemy>();
 		for (i in 0...waveGroup.enemyCount) {
 			var pos = FlxAngle.getCartesianCoords(i * 40, i * 120);
 			var enemy = Type.createInstance(waveGroup.enemyClass, [pos.x, pos.y, group]);
