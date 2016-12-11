@@ -53,7 +53,7 @@ class PlayerController
 		}
 		if (_left && playerEntity.x > 0) {
 			if (mA != 0) {
-				mA += 45 * FlxMath.numericComparison(mA, 0);
+				mA += 45 * FlxMath.signOf(mA);
 			} else {
 				mA = 180;
 			}
@@ -61,7 +61,7 @@ class PlayerController
 		}
 		if (_right && playerEntity.x + playerEntity.width < level.width) {
 		    if (mA != 0) {
-		    	mA -= 45 * FlxMath.numericComparison(mA, 0);
+		    	mA -= 45 * FlxMath.signOf(mA);
 		    }
 		    playerEntity.flipX = false;
 		}
