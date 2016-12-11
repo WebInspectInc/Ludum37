@@ -16,6 +16,7 @@ class AntBomb extends Enemy {
 		super(X, Y, Group);
 		customMovement = true;
 		loadGraphic(AssetPaths.Roach_egg__png);
+		corpse = AssetPaths.Roach_egg_corpse__png;
 
 		health = 60;
 

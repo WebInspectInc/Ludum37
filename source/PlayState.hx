@@ -39,6 +39,7 @@ class PlayState extends FlxState
 	public var playerBullets:FlxTypedGroup<Bullet>;
 	public var groundWeapons:FlxTypedGroup<Weapon>;
 	public var placedObjects:FlxTypedGroup<Placeable>;
+	public var corpses:FlxTypedGroup<Corpse>;
 
 	public var currentWave:Wave;
 	public var waveNumber:Int = 0;
@@ -49,6 +50,8 @@ class PlayState extends FlxState
 	{
 		level = new LevelState(this);
 		add(level);
+		corpses = new FlxTypedGroup<Corpse>();
+		add(corpses);
 		placedObjects = new FlxTypedGroup<Placeable>();
 		add(placedObjects);
 		enemies = new FlxTypedGroup<Enemy>();

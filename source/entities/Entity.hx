@@ -5,9 +5,10 @@ import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
-
 import flixel.addons.display.FlxNestedSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+
+import entities.enemies.Corpse;
 
 class Entity extends FlxNestedSprite {
 	public var customMovement:Bool = false; // Hack to get around entity class :'(
@@ -18,6 +19,8 @@ class Entity extends FlxNestedSprite {
 	public var state:PlayState;
 
 	public var parentGroup:FlxGroup;
+
+	public var corpse:String = null;
 
 	public function new(X:Float=0, Y:Float=0, ?Group:FlxGroup, ?State:PlayState) {
 		super(X, Y);
@@ -42,6 +45,10 @@ class Entity extends FlxNestedSprite {
 	}
 
 	override public function kill() {
+		if (corpse != null) {
+			state.corpses.add(new Corpse(x, y, corpse));
+		}
+
 		if (parentGroup != null)
 		{
 			parentGroup.remove(this);
