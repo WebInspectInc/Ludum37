@@ -50,7 +50,6 @@ class AntBomb extends Enemy {
 				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
 				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i < 2);
 				enemy.state = state;
-				state.add(enemy);
 			}
 			kill();
 			return;

@@ -46,7 +46,7 @@ class Entity extends FlxNestedSprite {
 
 	override public function kill() {
 		if (corpse != null) {
-			state.corpses.add(new Corpse(x, y, corpse));
+			state.corpses.add(new Corpse(x - width / 2, y - height / 2, corpse));
 		}
 
 		if (parentGroup != null)

@@ -21,6 +21,7 @@ import entities.weapons.*;
 import entities.bullets.*;
 import entities.placeable.*;
 import entities.enemies.*;
+import entities.obstacles.*;
 import controllers.PlayerController;
 
 import Wave;
@@ -36,6 +37,7 @@ class PlayState extends FlxState
 	public var musicPlaying:FlxSoundAsset = mainTheme;
 
 	public var enemies:FlxTypedGroup<Enemy>;
+	public var obstacles:FlxTypedGroup<Obstacle>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
 	public var groundWeapons:FlxTypedGroup<Weapon>;
 	public var placedObjects:FlxTypedGroup<Placeable>;
@@ -53,9 +55,12 @@ class PlayState extends FlxState
 		add(level);
 		corpses = new FlxTypedGroup<Corpse>();
 		add(corpses);
+		obstacles = new FlxTypedGroup<Obstacle>();
+		add(obstacles);
 		placedObjects = new FlxTypedGroup<Placeable>();
 		add(placedObjects);
 		enemies = new FlxTypedGroup<Enemy>();
+		add(enemies);
 		playerBullets = new FlxTypedGroup<Bullet>();
 		add(playerBullets);
 		groundWeapons = new FlxTypedGroup<Weapon>();
@@ -136,6 +141,7 @@ class PlayState extends FlxState
 		FlxG.collide(enemies, placedObjects);
 		FlxG.collide(enemies, enemies);
 		FlxG.overlap(playerBullets, placedObjects, destroyBullet);
+		FlxG.overlap(obstacles, player, collideWithObstacle);
 
 		super.update(elapsed);
 	}
@@ -165,7 +171,7 @@ class PlayState extends FlxState
 			for (enemy in newEnemies) {
 				enemy.state = this;
 				enemy.setPosition(enemy.x + location.x, enemy.y + location.y);
-				add(enemy);
+				// add(enemy);
 			}
 		}
 
@@ -173,6 +179,10 @@ class PlayState extends FlxState
 			FlxG.sound.playMusic(actionTheme, 1, true);
 			musicPlaying = actionTheme;
 		}
+	}
+
+	function collideWithObstacle(obstacle:Obstacle, player:Player){
+		obstacle.collideWithPlayer();
 	}
 
 	function destroyBullet(bullet:Bullet, wall:FlxSprite):Void {

@@ -8,6 +8,7 @@ import flixel.math.FlxAngle;
 import flixel.math.FlxRandom;
 import flixel.group.FlxGroup;
 import entities.Entity;
+import entities.obstacles.SpiderWeb;
 
 class Cockroach extends Enemy {
 	private static inline var SPRITE_HEIGHT:Int = 256;
@@ -16,6 +17,7 @@ class Cockroach extends Enemy {
 	private var accelerationSpeed:Int = 1000;
 
 	private var attackCooldown:Float = 0;
+	private var webCooldown:Float = 10;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
@@ -39,12 +41,20 @@ class Cockroach extends Enemy {
 
 	override public function update(delta: Float) {
 		attackCooldown -= delta;
+		webCooldown -= delta;
 
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
 
 		if (overlaps(state.player) && attackCooldown <= 0) {
 			attackCooldown = 1;
 			state.player.hurt(1);
+		}
+
+		if (webCooldown <= 0) {
+			var web = new SpiderWeb(x, y, cast(state.obstacles), state);
+			web.state = state;
+
+			webCooldown = 5;
 		}
 
 		moveAngle = angle;

@@ -58,7 +58,7 @@ class Deathroach extends Enemy {
 			eggTimer = 7;
 			var bomb = new AntBomb(x, y, cast(state.enemies));
 			bomb.state = state;
-			state.add(bomb);
+			// state.add(bomb);
 
 			add(boomSprite);
 			boomSprite.animation.play("boom");

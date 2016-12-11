@@ -20,6 +20,8 @@ class Player extends Entity
 	private static inline var SPRITE_HEIGHT:Int = 100;
 	private static inline var SPRITE_WIDTH:Int = 68;
 
+	private static inline var MOVE_SPEED:Int = 200;
+
 	public var playerWeapon:Weapon;
 
 	public var center:FlxNestedSprite;
@@ -85,6 +87,7 @@ class Player extends Entity
 		movePlacing();
 
 		super.update(delta);
+		moveSpeed = MOVE_SPEED;
 	}
 
 	public function pickupWeapon() {
