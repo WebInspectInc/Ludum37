@@ -23,6 +23,8 @@ class Bullet extends entities.Entity
 
 	public var skipEnemyCheck:Bool = false;
 
+	public var isEvil:Bool = false;
+
 	public function new(X:Float, Y:Float, State:PlayState, Speed:Int, Direction:Float, Damage:Float, Group:FlxGroup)
 	{
 	    super(X, Y, Group);
@@ -45,10 +47,18 @@ class Bullet extends entities.Entity
 			return;
 		}
 
-		for (e in state.enemies) {
-			if (overlaps(e) && hitEnemies.indexOf(e) == -1) {
-				hitEnemies.push(e);
-				hit(e);
+		if (!isEvil) {
+			for (e in state.enemies) {
+				if (overlaps(e) && hitEnemies.indexOf(e) == -1) {
+					hitEnemies.push(e);
+					hit(e);
+					return;
+				}
+			}
+		} else {
+			if (overlaps(state.player)) {
+				hitEnemies.push(state.player);
+				hit(state.player);
 				return;
 			}
 		}

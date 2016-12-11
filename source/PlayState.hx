@@ -39,6 +39,7 @@ class PlayState extends FlxState
 	public var enemies:FlxTypedGroup<Enemy>;
 	public var obstacles:FlxTypedGroup<Obstacle>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
+	public var evilBullets:FlxTypedGroup<Bullet>;
 	public var groundWeapons:FlxTypedGroup<Weapon>;
 	public var placedObjects:FlxTypedGroup<Placeable>;
 	public var corpses:FlxTypedGroup<Corpse>;
@@ -63,6 +64,8 @@ class PlayState extends FlxState
 		add(enemies);
 		playerBullets = new FlxTypedGroup<Bullet>();
 		add(playerBullets);
+		evilBullets = new FlxTypedGroup<Bullet>();
+		add(evilBullets);
 		groundWeapons = new FlxTypedGroup<Weapon>();
 		add(groundWeapons);
 
@@ -162,7 +165,9 @@ class PlayState extends FlxState
 
 		var center = new FlxPoint(600, 475);
 		var random = FlxG.random;
-		var location = FlxAngle.getCartesianCoords(random.int(1000, 1100), random.int(0, 360), center);
+		var location = FlxAngle.getCartesianCoords(random.int(1000, 1100), random.int(0, 360));
+		location.x += center.x;
+		location.y += center.y;
 
 		resetSpawn = true;
 

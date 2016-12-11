@@ -46,11 +46,13 @@ class AntBomb extends Enemy {
 
 		timer -= delta;
 		if (timer <= 0) {
-			for (i in 0...8) {
+			for (i in 0...7) {
 				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
-				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i < 2);
+				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i < 1);
 				enemy.state = state;
 			}
+			var enemy = new Scorpion(x, y, parentGroup);
+			enemy.state = state;
 			kill();
 			return;
 		}
