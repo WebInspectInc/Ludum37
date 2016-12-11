@@ -2,6 +2,7 @@ package controllers;
 
 import flixel.FlxG;
 import flixel.math.FlxAngle;
+import flixel.math.FlxMath;
 import entities.Player;
 
 class PlayerController 
@@ -16,9 +17,11 @@ class PlayerController
 	var _setDown:Bool = false;
 
 	var playerEntity:Player;
+	var level:LevelState;
 
-	public function new(playerEntity:Player) {
+	public function new(playerEntity:Player, level:LevelState) {
 		this.playerEntity = playerEntity;
+		this.level = level;
 	}
 
 	public function update() {
@@ -42,28 +45,24 @@ class PlayerController
 		}
 
 		var mA:Float = 0;
-		if (_up) {
+		if (_up && playerEntity.y > 0) {
 		    mA = -90;
-		    if (_left)
-		        mA -= 45;
-		    else if (_right)
-		        mA += 45;
 		}
-		else if (_down) {
+		if (_down && playerEntity.y + playerEntity.height < level.height) {
 		    mA = 90;
-		    if (_left)
-		        mA += 45;
-		    else if (_right)
-		        mA -= 45;
 		}
-		else if (_left)
-		{
-		    mA = 180;
+		if (_left && playerEntity.x > 0) {
+			if (mA != 0) {
+				mA += 45 * FlxMath.numericComparison(mA, 0);
+			} else {
+				mA = 180;
+			}
 		    playerEntity.flipX = true;
 		}
-		else if (_right)
-		{
-		    mA = 0;
+		if (_right && playerEntity.x + playerEntity.width < level.width) {
+		    if (mA != 0) {
+		    	mA -= 45 * FlxMath.numericComparison(mA, 0);
+		    }
 		    playerEntity.flipX = false;
 		}
 

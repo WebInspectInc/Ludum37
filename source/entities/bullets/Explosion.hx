@@ -20,6 +20,8 @@ class Explosion extends Bullet {
 		animation.add('explode', [0,1,2,3,4,5,6,7,8,9], 25, false);
 		animation.play('explode');
 
+		explosionSound.play();
+
 		setSize(132, 120);
 		offset.set(0, -16);
 	}

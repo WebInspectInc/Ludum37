@@ -70,12 +70,16 @@ class PlayState extends FlxState
 		pepper.state = this;
 		groundWeapons.add(pepper);
 
+		var baked = new BakedBomb(350, 300);
+		baked.state = this;
+		groundWeapons.add(baked);
+
 		currentWave = Wave.getWave(waveNumber);
 
-		playerController = new PlayerController(this.player);
+		playerController = new PlayerController(this.player, level);
 
 		FlxG.camera.follow(player, FlxCameraFollowStyle.TOPDOWN);
-		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height, true);
+		FlxG.camera.setScrollBoundsRect(0, 0, level.width, level.height);
 
 		var healthBar = new FlxBar(7, 7, LEFT_TO_RIGHT, 100, 20, player, "health", 0, 10, true);
 		healthBar.scrollFactor.set(0, 0);
