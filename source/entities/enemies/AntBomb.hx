@@ -1,11 +1,11 @@
-package entities;
+package entities.enemies;
 
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup;
 import flixel.math.FlxAngle;
 import flixel.FlxG;
 
-class AntBomb extends Entity {
+class AntBomb extends Enemy {
 	
 	public var timer:Float = 8;
 	public var z:Float = 0;
@@ -22,7 +22,7 @@ class AntBomb extends Entity {
 		health = 60;
 
 		zVel = FlxG.random.float(200, 300);
-		velocity.set(FlxG.random.float(-100, 100), FlxG.random.float(-100, 100));
+		velocity.set(FlxG.random.float(-200, 200), FlxG.random.float(-200, 200));
 	}
 
 	override public function update(delta:Float) {
@@ -47,9 +47,9 @@ class AntBomb extends Entity {
 
 		timer -= delta;
 		if (timer <= 0) {
-			for (i in 0...8) {
-				var pos = FlxAngle.getCartesianCoords(i * 40, i * 120);
-				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup);
+			for (i in 0...16) {
+				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
+				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i > 13);
 				enemy.state = state;
 				state.add(enemy);
 			}

@@ -20,6 +20,7 @@ import entities.*;
 import entities.weapons.*;
 import entities.bullets.*;
 import entities.placeable.*;
+import entities.enemies.*;
 import controllers.PlayerController;
 
 import Wave;
@@ -34,7 +35,7 @@ class PlayState extends FlxState
 	private static var actionTheme:FlxSoundAsset = AssetPaths.shootingTheme__wav;
 	public var musicPlaying:FlxSoundAsset = mainTheme;
 
-	public var enemies:FlxTypedGroup<Entity>;
+	public var enemies:FlxTypedGroup<Enemy>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
 	public var groundWeapons:FlxTypedGroup<Weapon>;
 	public var placedObjects:FlxTypedGroup<Placeable>;
@@ -50,7 +51,7 @@ class PlayState extends FlxState
 		add(level);
 		placedObjects = new FlxTypedGroup<Placeable>();
 		add(placedObjects);
-		enemies = new FlxTypedGroup<Entity>();
+		enemies = new FlxTypedGroup<Enemy>();
 		playerBullets = new FlxTypedGroup<Bullet>();
 		add(playerBullets);
 		groundWeapons = new FlxTypedGroup<Weapon>();
@@ -125,9 +126,9 @@ class PlayState extends FlxState
 		var random = FlxG.random;
 		var location = FlxAngle.getCartesianCoords(random.int(1000, 1100), random.int(0, 360), center);
 
-		var enemies = currentWave.nextGroup(cast(enemies));
-		if (enemies != null) {
-			for (enemy in enemies) {
+		var newEnemies = currentWave.nextGroup(cast(enemies));
+		if (newEnemies != null) {
+			for (enemy in newEnemies) {
 				enemy.state = this;
 				enemy.setPosition(enemy.x + location.x, enemy.y + location.y);
 				add(enemy);
