@@ -9,7 +9,7 @@ import entities.enemies.*;
 typedef WaveData = {enemyClass:Class<Enemy>, enemyCount:Int};
 
 class Wave {
-	private static var waves:Array<Wave> = null;
+	public static var waves:Array<Wave> = null;
 
 	private var waveData:Array<WaveData>;
 	private var groupNumber:Int = 0;
