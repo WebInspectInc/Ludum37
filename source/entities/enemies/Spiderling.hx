@@ -37,7 +37,7 @@ class Spiderling extends Enemy {
 
 		health = 10;
 		this.moveSpeed = 200;
-		loadGraphic(AssetPaths.small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+		loadGraphic(AssetPaths.super_small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 		corpse = AssetPaths.small_spider_corpse__png;
 		greyCorpse = AssetPaths.grey_small_spider_corpse__png;
 
@@ -86,7 +86,7 @@ class Spiderling extends Enemy {
 			targetPlayer = FlxG.random.weightedPick([5, 1]) == 1;
 			if (targetPlayer) {
 				chaseTime = 0;
-				makeGraphic(50, 30, FlxColor.RED);
+				loadGraphic(AssetPaths.super_small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 			} else {
 				loadGraphic(AssetPaths.small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 			}
