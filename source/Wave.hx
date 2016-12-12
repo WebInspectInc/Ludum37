@@ -62,7 +62,7 @@ class Wave {
 
 	public static function getWave(WaveNumber:Int):Wave {
 		var w = genWaves();
-		if (!cast(w[WaveNumber])) {
+		if (WaveNumber >= w.length) {
 			FlxG.switchState(new WinState());
 		}
 		return genWaves()[WaveNumber];

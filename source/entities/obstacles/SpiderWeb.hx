@@ -11,6 +11,6 @@ class SpiderWeb extends Obstacle {
 	}
 
 	override public function collideWithPlayer() {
-		state.player.moveSpeed = cast(state.player.moveSpeed / 2);
+		state.player.moveSpeed = 150;
 	}
 }

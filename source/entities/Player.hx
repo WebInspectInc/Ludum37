@@ -20,7 +20,7 @@ class Player extends Entity
 	private static inline var SPRITE_HEIGHT:Int = 100;
 	private static inline var SPRITE_WIDTH:Int = 68;
 
-	private static inline var MOVE_SPEED:Int = 200;
+	private static inline var MOVE_SPEED:Int = 250;
 
 	public var playerWeapon:Weapon;
 
@@ -29,6 +29,8 @@ class Player extends Entity
 	public var placing:Placeable;
 
 	public var firing:Bool = false;
+
+	public var lastHurt:Float = 0;
 
 	public function new(playState:PlayState, ?X:Float=0, ?Y:Float=0)
 	{
@@ -152,5 +154,13 @@ class Player extends Entity
 
 	override public function kill() {
 		FlxG.switchState(new LoseState());
+	}
+
+	override public function hurt(damage:Float) {
+		var now = Date.now().getTime();
+		if (now - lastHurt > 1) {
+			super.hurt(damage);
+			lastHurt = now;
+		}
 	}
 }

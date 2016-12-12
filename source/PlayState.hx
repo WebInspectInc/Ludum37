@@ -30,7 +30,7 @@ class PlayState extends FlxState
 {
 	private var playerController:PlayerController;
 	public var player:Player;
-	private var level:LevelState;
+	public var level:LevelState;
 
 	private static var mainTheme:FlxSoundAsset = AssetPaths.menuTheme__wav;
 	private static var actionTheme:FlxSoundAsset = AssetPaths.shootingTheme__wav;
