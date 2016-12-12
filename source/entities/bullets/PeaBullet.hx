@@ -7,7 +7,7 @@ import flixel.FlxG;
 class PeaBullet extends Bullet {
 
 	private var explosionSound:FlxSound = FlxG.sound.load(AssetPaths.explosion_short__wav, .2);
-	private var flyTime:Float = 0.6;
+	private var flyTime:Float = 0.75;
 
 	override public function new(X:Float, Y:Float, State:PlayState, Speed:Int, Direction:Float, Damage:Float, Group:FlxGroup, ?IsEvil:Bool) {
 		super(X, Y, State, Speed, Direction, Damage, Group);
