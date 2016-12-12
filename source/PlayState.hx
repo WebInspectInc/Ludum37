@@ -32,7 +32,7 @@ class PlayState extends FlxState
 	public var player:Player;
 	private var level:LevelState;
 
-	private static var mainTheme:FlxSoundAsset = AssetPaths.strategyTheme__wav;
+	private static var mainTheme:FlxSoundAsset = AssetPaths.menuTheme__wav;
 	private static var actionTheme:FlxSoundAsset = AssetPaths.shootingTheme__wav;
 	public var musicPlaying:FlxSoundAsset = mainTheme;
 
@@ -105,10 +105,8 @@ class PlayState extends FlxState
 		ammoBar.scrollFactor.set(0, 0);
 		add(ammoBar);
 
-		if (FlxG.sound.music == null) {
-			FlxG.sound.playMusic(mainTheme, 1, true);
-			musicPlaying = mainTheme;
-		}
+		FlxG.sound.playMusic(mainTheme, 1, true);
+		musicPlaying = mainTheme;
 	}
 
 	override public function update(elapsed:Float):Void
@@ -180,7 +178,7 @@ class PlayState extends FlxState
 		}
 
 		if (musicPlaying != actionTheme) {
-			FlxG.sound.playMusic(actionTheme, 1, true);
+			FlxG.sound.playMusic(actionTheme, 0.7, true);
 			musicPlaying = actionTheme;
 		}
 	}
