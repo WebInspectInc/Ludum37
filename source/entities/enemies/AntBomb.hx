@@ -13,7 +13,7 @@ class AntBomb extends Enemy {
 	public var zVel:Float;
 	public var grounded:Bool = false;
 
-	private var explosionSound:FlxSound = FlxG.sound.load(AssetPaths.explosion_short__wav, .2);
+	private var explosionSound:FlxSound = FlxG.sound.load(AssetPaths.big_explosion__wav, .2);
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
