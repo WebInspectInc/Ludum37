@@ -7,6 +7,7 @@ import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.addons.display.FlxNestedSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.tweens.misc.ColorTween;
 
 import entities.enemies.Corpse;
 
@@ -17,6 +18,8 @@ class Entity extends FlxNestedSprite {
 
 	public var moveSpeed:Float = 200;
 	public var state:PlayState;
+
+	public var hurtTime:Float;
 
 	public var parentGroup:FlxGroup;
 
@@ -42,6 +45,17 @@ class Entity extends FlxNestedSprite {
 			}
 		}
 
+		if (hurtTime >= 0) {
+			if (hurtTime % 2 == 0) {
+				alpha = 0.5;
+			} else {
+				alpha = 1;
+			}
+			hurtTime -= 0.5;
+		} else {
+			alpha = 1;
+		}
+
 		super.update(delta);
 	}
 
@@ -58,5 +72,15 @@ class Entity extends FlxNestedSprite {
 		}
 
 		destroy();
+	}
+
+	override public function hurt(Damage:Float) {
+		hurtTime = 30; //frames
+
+		health = health - Damage;
+		if (health <= 0)
+		{
+			kill();
+		}
 	}
 }
