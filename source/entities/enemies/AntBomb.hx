@@ -18,7 +18,7 @@ class AntBomb extends Enemy {
 		loadGraphic(AssetPaths.Roach_egg__png);
 		corpse = AssetPaths.Roach_egg_corpse__png;
 
-		health = 60;
+		health = 50;
 
 		zVel = FlxG.random.float(200, 300);
 		velocity.set(FlxG.random.float(-200, 200), FlxG.random.float(-200, 200));

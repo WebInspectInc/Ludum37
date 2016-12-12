@@ -19,7 +19,7 @@ class ScorpionEgg extends Enemy {
 		loadGraphic(AssetPaths.spike_egg__png);
 		corpse = AssetPaths.spike_egg_corpse__png;
 
-		health = 20;
+		health = 60;
 
 		zVel = FlxG.random.float(200, 300);
 		velocity.set(FlxG.random.float(-200, 200), FlxG.random.float(-200, 200));

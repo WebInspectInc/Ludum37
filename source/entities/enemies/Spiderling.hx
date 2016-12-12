@@ -22,7 +22,7 @@ class Spiderling extends Enemy {
 
 	private var attackCooldown:Float = 0;
 	private var randomPoint:FlxPoint = new FlxPoint();
-	public var chaseTime:Float = 6;
+	public var chaseTime:Float = 0;
 	private var isSuperAnt:Bool = false;
 
 	private var mother:MotherSpider;
@@ -47,8 +47,7 @@ class Spiderling extends Enemy {
 		animation.add('walk', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25], 25);
 		animation.play('walk');
 
-		var rnd = new FlxRandom();
-		randomPoint = new FlxPoint(500, 500);
+		lastRushTime = state.time;
 
 		this.maxVelocity = new FlxPoint(150, 150);
 		this.moving = true;
@@ -67,6 +66,7 @@ class Spiderling extends Enemy {
 			}
 			chaseTime = 6;
 		}
+
 		var angle = FlxAngle.angleBetweenPoint(this, randomPoint, true);
 
 		if (overlaps(state.player) && attackCooldown <= 0) {
@@ -80,19 +80,16 @@ class Spiderling extends Enemy {
 			flipX = true;
 		}
 
-		var now = Date.now().getTime();
+		var now = state.time;
 		if (now - lastRushTime > 5) {
 			lastRushTime = now;
-			targetPlayer = FlxG.random.weightedPick([10, 1]) == 1;
+			targetPlayer = FlxG.random.weightedPick([5, 1]) == 1;
 			if (targetPlayer) {
 				chaseTime = 0;
+				makeGraphic(50, 30, FlxColor.RED);
+			} else {
+				loadGraphic(AssetPaths.small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
 			}
-		}
-
-		if (!targetPlayer) {
-			loadGraphic(AssetPaths.small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
-		} else {
-			makeGraphic(50, 30, FlxColor.RED);
 		}
 
 		super.update(delta);
