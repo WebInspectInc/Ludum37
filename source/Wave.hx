@@ -72,7 +72,7 @@ class Wave {
 	public static function genWaves():Array<Wave> {
 		if (waves == null) {
 			waves = [
-				new Wave([{enemyClass: Ant, enemyCount: 10},
+				new Wave([{enemyClass: MotherSpider, enemyCount: 1},
 						  {enemyClass: Ant, enemyCount: 10}
 						  ]),
 				new Wave([{enemyClass: Ant, enemyCount: 10},

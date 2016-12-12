@@ -28,6 +28,8 @@ import Wave;
 
 class PlayState extends FlxState
 {
+	public var time:Float = 0;
+
 	private var playerController:PlayerController;
 	public var player:Player;
 	public var level:LevelState;
@@ -114,7 +116,13 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+		time += elapsed;
 		this.playerController.update();
+
+		if (corpses.members.length > 200) {
+			var corpse = corpses.members.shift();
+			corpse.destroy();
+		}
 
 		spawnTimer -= elapsed;
 		if (spawnTimer <= 0) {

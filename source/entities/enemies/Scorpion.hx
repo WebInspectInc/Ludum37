@@ -14,7 +14,8 @@ class Scorpion extends Enemy {
 	private static inline var SPRITE_WIDTH:Int = 119;
 	private static inline var SPRITE_HEIGHT:Int = 110;
 
-	private var fireTimer:Float = 0;
+	private var fireRate:Float = 1;
+	private var lastFired:Float = 0;
 
 	private var turnDirection:Float = 0;
 	private var followDistance:Float = 350;
@@ -34,6 +35,8 @@ class Scorpion extends Enemy {
 
 		health = 20;
 
+		fireRate = FlxG.random.float(0.9, 2);
+
 		turnDirection = FlxG.random.weightedPick([50, 0, 50]) - 1;
 		followDistance = FlxG.random.float(250, 450);
 
@@ -41,11 +44,10 @@ class Scorpion extends Enemy {
 	}
 
 	override public function update(delta:Float) {
-		fireTimer -= delta;
-
-		if (fireTimer <= 0) {
+		var now = state.time;
+		if (now - lastFired > fireRate) {
 			var bullet = new PeaBullet(x, y, state, 250, FlxAngle.angleBetween(this, state.player.center, true), 1, cast(state.evilBullets), true);
-			fireTimer = 1;
+			lastFired = now;
 		}
 
 		var distance = FlxMath.distanceBetween(state.player.center, this);

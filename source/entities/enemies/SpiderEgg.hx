@@ -22,7 +22,7 @@ class SpiderEgg extends Enemy {
 		loadGraphic(AssetPaths.spider_egg__png);
 		corpse = AssetPaths.spider_egg_corpse__png;
 
-		health = 20;
+		health = 40;
 
 		zVel = FlxG.random.float(200, 300);
 		velocity.set(FlxG.random.float(-200, 200), FlxG.random.float(-200, 200));
