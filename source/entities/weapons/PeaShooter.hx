@@ -19,7 +19,7 @@ class PeaShooter extends Weapon {
 		ammo = 10000;
 		loadGraphic(AssetPaths.pea_shooter__png, false, SPRITE_WIDTH, SPRITE_HEIGHT);
 		origin.set(SPRITE_WIDTH * 0.25, SPRITE_HEIGHT * 0.5);
-		offset.set(-30, -60);
+		offset.set(-10, -60);
 		solid = true;
 	}
 

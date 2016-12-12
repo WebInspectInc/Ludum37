@@ -24,7 +24,7 @@ class Launcher extends Weapon {
 		animation.play('empty');
 
 		origin.set(SPRITE_WIDTH * 0.25, SPRITE_HEIGHT * 0.5);
-		offset.set(-30, -60);
+		offset.set(-10, -40);
 		solid = true;
 	}
 
@@ -32,6 +32,12 @@ class Launcher extends Weapon {
 		cooldown -= delta;
 
 		reloadTimer -= delta;
+
+		if (relativeAngle > -90 && relativeAngle < 90) {
+			flipY = false;
+		} else {
+			flipY = true;
+		}
 
 		if (reloadTimer <= 0 && ammo < 15) {
 			ammo += 1;
@@ -49,7 +55,7 @@ class Launcher extends Weapon {
 				ammo -= 1;
 
 				cooldown = 0.5;
-				var newBullet = new Toothpick(x + relativeX - offset.x, y + relativeY - offset.y, state, 1000, angle, 30, cast(state.playerBullets));
+				var newBullet = new Toothpick(x - offset.x, y - offset.y, state, 1000, angle, 30, cast(state.playerBullets));
 				newBullet.skipEnemyCheck = true;
 				isLoaded = false;
 			} else {
