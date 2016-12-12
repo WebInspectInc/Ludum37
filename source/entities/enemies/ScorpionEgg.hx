@@ -49,7 +49,7 @@ class ScorpionEgg extends Enemy {
 
 		timer -= delta;
 		if (timer <= 0) {
-			for (i in 0...6) {
+			for (i in 0...5) {
 				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
 				var enemy:Enemy = null;
 				if (i < 2) {
