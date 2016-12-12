@@ -93,6 +93,7 @@ class PlayState extends FlxState
 		// launcher.state = this;
 		// groundWeapons.add(launcher);
 
+		Wave.genWaves();
 		currentWave = Wave.getWave(waveNumber);
 
 		playerController = new PlayerController(this.player, level);
