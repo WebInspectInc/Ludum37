@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.group.FlxGroup;
 import flixel.math.FlxAngle;
 import entities.enemies.*;
@@ -48,6 +49,10 @@ class Wave {
 	}
 
 	public static function getWave(WaveNumber:Int):Wave {
+		var w = genWaves();
+		if (!cast(w[WaveNumber])) {
+			FlxG.switchState(new WinState());
+		}
 		return genWaves()[WaveNumber];
 	}
 
