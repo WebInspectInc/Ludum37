@@ -13,10 +13,22 @@ class Wave {
 	private var waveData:Array<WaveData>;
 	private var groupNumber:Int = 0;
 
+	public var waveNames:Array<String> = new Array<String>();
+
 	public function new(Data:Array<WaveData>) {
 		waveData = Data;
+		waveNames = [
+			'Wave 1: Our Epic Battle Begins',
+			'Wave 2: Watch Yer Back, Young’n',
+			'Wave 3: A Sticky Situation',
+			'Wave 4: Right Back At Ya, Bro',
+			'Wave 5: The Deathroach',
+			'Wave 6: Testing Your Gnomish Metal',
+			'Wave 7: New Ways to Die',
+			'Wave 8: Mother'
+		];
 	}
-
+ 
 	public function createEnemies(group:FlxGroup):Array<Enemy> {
 		var y = 0.0;
 		var enemies = new Array<Enemy>();
@@ -59,29 +71,35 @@ class Wave {
 	public static function genWaves():Array<Wave> {
 		if (waves == null) {
 			waves = [
-				new Wave([{enemyClass: MotherSpider, enemyCount: 1},
+				new Wave([{enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Ant, enemyCount: 10}
 						  ]),
 				new Wave([{enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Ant, enemyCount: 10},
-						  {enemyClass: Scorpion, enemyCount: 1},
-						  {enemyClass: Scorpion, enemyCount: 2},
 						  {enemyClass: Cockroach, enemyCount: 1},
-						  {enemyClass: Spider, enemyCount: 1}
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 2}
 						  ]),
 				new Wave([{enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Spider, enemyCount: 2},
 						  {enemyClass: Spider, enemyCount: 1},
 						  {enemyClass: Scorpion, enemyCount: 2},
+						  {enemyClass: Spider, enemyCount: 1},
+						  {enemyClass: Spider, enemyCount: 2},
+						  {enemyClass: Spider, enemyCount: 2}
+						  ]),
+				new Wave([{enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Spider, enemyCount: 2},
+						  {enemyClass: Scorpion, enemyCount: 2},
+						  {enemyClass: Scorpion, enemyCount: 2},
 						  {enemyClass: Cockroach, enemyCount: 1},
-						  {enemyClass: Spider, enemyCount: 1}
+						  {enemyClass: Cockroach, enemyCount: 2},
+						  {enemyClass: Spider, enemyCount: 1},
+						  {enemyClass: Spider, enemyCount: 2}
 						  ]),
 				new Wave([{enemyClass: Deathroach, enemyCount: 1}
 						  ]),
-				new Wave([{enemyClass: Spider, enemyCount: 1},
-						  {enemyClass: Cockroach, enemyCount: 1}]),
 				new Wave([{enemyClass: Cockroach, enemyCount: 1},
-						  {enemyClass: Deathroach, enemyCount: 1},
 						  {enemyClass: Scorpion, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
@@ -89,6 +107,21 @@ class Wave {
 						  {enemyClass: Ant, enemyCount: 5},
 						  {enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Ant, enemyCount: 10}
+						  ]),
+				new Wave([{enemyClass: Scorpion, enemyCount: 1},
+						  {enemyClass: Deathroach, enemyCount: 1},
+						  {enemyClass: Scorpion, enemyCount: 1},
+						  {enemyClass: Scorpion, enemyCount: 2},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Ant, enemyCount: 5},
+						  {enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Ant, enemyCount: 10}
+						  ]),
+				new Wave([{enemyClass: MotherSpider, enemyCount: 1},
+						  {enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Spider, enemyCount: 3}
 						  ])
 			];
 		}

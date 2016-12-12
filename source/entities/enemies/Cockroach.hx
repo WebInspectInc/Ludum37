@@ -19,7 +19,7 @@ class Cockroach extends Enemy {
 
 	private var attackCooldown:Float = 0;
 
-	private var chargeCooldown:Float = 10;
+	private var chargeCooldown:Float = 6;
 	private var charging:Bool = false;
 	private var chargeTimer:Float = 0;
 	private var chargeAngle:Float = 0;

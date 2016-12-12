@@ -123,4 +123,12 @@ class MotherSpider extends Enemy {
 
 		super.update(delta);
 	}
+
+	override public function hurt(Damage:Float) {
+		health = health - Damage;
+		if (health <= 0)
+		{
+			kill();
+		}
+	}
 }

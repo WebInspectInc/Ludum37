@@ -32,7 +32,7 @@ class PlayState extends FlxState
 	public var player:Player;
 	private var level:LevelState;
 
-	private static var mainTheme:FlxSoundAsset = AssetPaths.strategyTheme__wav;
+	private static var mainTheme:FlxSoundAsset = AssetPaths.menuTheme__wav;
 	private static var actionTheme:FlxSoundAsset = AssetPaths.shootingTheme__wav;
 	public var musicPlaying:FlxSoundAsset = mainTheme;
 
@@ -46,6 +46,7 @@ class PlayState extends FlxState
 
 	public var currentWave:Wave;
 	public var waveNumber:Int = 0;
+	public var currentText:FlxText;
 
 	public var spawnTimer:Float = 6;
 	public var resetSpawn:Bool = true;
@@ -101,14 +102,14 @@ class PlayState extends FlxState
 		healthBar.scrollFactor.set(0, 0);
 		add(healthBar);
 
-		var ammoBar = new FlxBar(7, 34, LEFT_TO_RIGHT, 100, 5, player.playerWeapon, "ammo", 0, 15, false);
-		ammoBar.scrollFactor.set(0, 0);
-		add(ammoBar);
+		// var ammoBar = new FlxBar(7, 34, LEFT_TO_RIGHT, 100, 5, player.playerWeapon, "ammo", 0, 15, false);
+		// ammoBar.scrollFactor.set(0, 0);
+		// add(ammoBar);
 
-		if (FlxG.sound.music == null) {
-			FlxG.sound.playMusic(mainTheme, 1, true);
-			musicPlaying = mainTheme;
-		}
+		FlxG.sound.playMusic(mainTheme, 1, true);
+		musicPlaying = mainTheme;
+
+		announceWave();
 	}
 
 	override public function update(elapsed:Float):Void
@@ -126,10 +127,18 @@ class PlayState extends FlxState
 			currentWave = Wave.getWave(waveNumber);
 			resetSpawn = false;
 
+			announceWave();
+
 			if (waveNumber == 2) {
 				var pepper = new PepperGun(250, 500);
 				pepper.state = this;
 				groundWeapons.add(pepper);
+			}
+
+			if (waveNumber == 5) {
+				var launcher = new Launcher(650, 400);
+				launcher.state = this;
+				groundWeapons.add(launcher);
 			}
 
 			if (musicPlaying != mainTheme) {
@@ -159,8 +168,19 @@ class PlayState extends FlxState
 		barrier1.setDown();
 	}
 
+	public function announceWave() {
+		var names = currentWave.waveNames;
+
+		currentText = new FlxText(0, 0, -1, names[waveNumber], 20);
+		currentText.color = FlxColor.BLACK;
+		currentText.screenCenter();
+		currentText.scrollFactor.set(0, 0);
+		add(currentText);
+	}
+
 	public function spawnSpawn() {
 		spawnTimer = 1;
+		remove(currentText);
 
 		var center = new FlxPoint(600, 475);
 		var random = FlxG.random;
@@ -180,7 +200,7 @@ class PlayState extends FlxState
 		}
 
 		if (musicPlaying != actionTheme) {
-			FlxG.sound.playMusic(actionTheme, 1, true);
+			FlxG.sound.playMusic(actionTheme, 0.7, true);
 			musicPlaying = actionTheme;
 		}
 	}
