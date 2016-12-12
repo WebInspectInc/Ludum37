@@ -35,8 +35,8 @@ class Spiderling extends Enemy {
 		health = 10;
 		this.moveSpeed = 200;
 		loadGraphic(AssetPaths.small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
-		// corpse = AssetPaths.ant_corpse__png;
-		// greyCorpse = AssetPaths.grey_ant_corpse__png;
+		corpse = AssetPaths.small_spider_corpse__png;
+		greyCorpse = AssetPaths.grey_small_spider_corpse__png;
 
 		setSize(20, 10);
 		offset.set(15, 15);

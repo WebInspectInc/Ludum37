@@ -17,7 +17,7 @@ class SpiderEgg extends Enemy {
 		super(X, Y, Group);
 		customMovement = true;
 		loadGraphic(AssetPaths.spider_egg__png);
-		// corpse = AssetPaths.Roach_egg_corpse__png;
+		corpse = AssetPaths.spider_egg_corpse__png;
 
 		health = 20;
 

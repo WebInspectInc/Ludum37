@@ -15,7 +15,7 @@ class SuperScorpion extends Enemy {
 	private static inline var SPRITE_HEIGHT:Int = 110;
 
 	private var fireTimer:Float = 0;
-	private var shotsLeft:Int = 0;
+	// private var shotsLeft:Int = 0;
 	private var firePattern:Int = 0;
 
 	private var turnDirection:Float = 0;
@@ -44,10 +44,10 @@ class SuperScorpion extends Enemy {
 		fireTimer -= delta;
 
 		if (fireTimer <= 0) {
-			if (shotsLeft == 0) {
-				shotsLeft = 3;
+			// if (shotsLeft == 0) {
+				// shotsLeft = 3;
 				firePattern = FlxG.random.weightedPick([2,1,2]);
-			}
+			// }
 
 			switch (firePattern) {
 				case 0: // normal
@@ -64,13 +64,7 @@ class SuperScorpion extends Enemy {
 					var bulletAngle = FlxAngle.angleBetweenPoint(this, targetPos, true);
 					var bullet = new PeaBullet(x, y, state, 250, bulletAngle, 1, cast(state.evilBullets), true);
 			}
-			shotsLeft -= 1;
-
-			if (shotsLeft > 0) {
-				fireTimer = 0.4;
-			} else {
-				fireTimer = 1.3;
-			}
+			fireTimer = 1;
 		}
 
 		var distance = FlxMath.distanceBetween(state.player.center, this);

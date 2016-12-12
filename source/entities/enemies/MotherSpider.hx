@@ -34,6 +34,8 @@ class MotherSpider extends Enemy {
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
 		loadGraphic(AssetPaths.Death_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+		corpse = AssetPaths.death_spider_corpse__png;
+		greyCorpse = AssetPaths.grey_death_spider_corpse__png;
 
 		animation.add('walk', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25], 25);
 		animation.play('walk');
@@ -63,7 +65,7 @@ class MotherSpider extends Enemy {
 		eggTimer -= delta;
 
 		if (eggTimer <= 0 && eggsLeft == 0) {
-			eggType = FlxG.random.weightedPick([33,33,33]);
+			eggType = FlxG.random.weightedPick([1,1,2]);
 			if (eggType == 2) {
 				if (spiderlings.length > 150) {
 					eggType = FlxG.random.weightedPick([50, 50]);
@@ -80,7 +82,8 @@ class MotherSpider extends Enemy {
 					var bomb = new AntBomb(x, y, cast(state.enemies));
 					bomb.state = state;
 				case 1:
-					// Scorpion Egg
+					var bomb = new ScorpionEgg(x, y, cast(state.enemies));
+					bomb.state = state;
 				case 2:
 					var bomb = new SpiderEgg(x, y, cast(state.enemies));
 					bomb.mother = this;
