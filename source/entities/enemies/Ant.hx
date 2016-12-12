@@ -19,7 +19,6 @@ class Ant extends Enemy {
 
 	private var accelerationSpeed:Int = 1000;
 
-	private var attackCooldown:Float = 0;
 	private var randomPoint:FlxPoint = new FlxPoint();
 	private var chaseTime:Float = 6;
 	private var isSuperAnt:Bool = false;
@@ -60,7 +59,6 @@ class Ant extends Enemy {
 	}
 
 	override public function update(delta: Float) {
-		attackCooldown -= delta;
 		chaseTime -= delta;
 
 		var rnd = new FlxRandom();
@@ -70,11 +68,6 @@ class Ant extends Enemy {
 		}
 		var angle = FlxAngle.angleBetweenPoint(this, randomPoint, true);
 
-		if (overlaps(state.player) && attackCooldown <= 0) {
-			attackCooldown = 1;
-			state.player.hurt(1);
-		}
-
 		moveAngle = angle;
 
 		if (velocity.x < 0) {
@@ -82,5 +75,11 @@ class Ant extends Enemy {
 		}
 
 		super.update(delta);
+	}
+
+	override public function attack(player:Player) {
+		if (overlaps(player)) {
+			player.hurt(1);
+		}
 	}
 }

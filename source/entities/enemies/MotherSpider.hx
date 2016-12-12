@@ -19,8 +19,6 @@ class MotherSpider extends Enemy {
 
 	private var accelerationSpeed:Int = 500;
 
-	private var attackCooldown:Float = 0;
-
 	private var eggTimer:Float = 6;
 	private var eggType:Int = 0;
 	private var eggsLeft:Int = 0;
@@ -61,7 +59,6 @@ class MotherSpider extends Enemy {
 	}
 
 	override public function update(delta: Float) {
-		attackCooldown -= delta;
 		eggTimer -= delta;
 
 		if (eggTimer <= 0 && eggsLeft == 0) {
@@ -113,11 +110,6 @@ class MotherSpider extends Enemy {
 			vel.set(0, 0);
 		}
 
-		if (overlaps(state.player) && attackCooldown <= 0) {
-			attackCooldown = 1;
-			state.player.hurt(1);
-		}
-
 		this.x += vel.x * delta;
 		this.y += vel.y * delta;
 
@@ -129,6 +121,12 @@ class MotherSpider extends Enemy {
 		if (health <= 0)
 		{
 			kill();
+		}
+	}
+
+	override public function attack(player:Player) {
+		if (overlaps(player)) {
+			player.hurt(1);
 		}
 	}
 }

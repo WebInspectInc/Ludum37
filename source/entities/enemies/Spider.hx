@@ -18,7 +18,6 @@ class Spider extends Enemy {
 
 	private var accelerationSpeed:Int = 1000;
 
-	private var attackCooldown:Float = 0;
 	private var webCooldown:Float = 10;
 
 	private var turnDirection:Float = 0;
@@ -47,7 +46,6 @@ class Spider extends Enemy {
 	}
 
 	override public function update(delta: Float) {
-		attackCooldown -= delta;
 		webCooldown -= delta;
 
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
@@ -55,11 +53,6 @@ class Spider extends Enemy {
 		var distance = FlxMath.distanceBetween(this, this.state.player);
 		if (distance < 400) {
 			angle = angle + 90 * turnDirection;
-		}
-
-		if (overlaps(state.player) && attackCooldown <= 0) {
-			attackCooldown = 1;
-			state.player.hurt(1);
 		}
 
 		if (webCooldown <= 0) {
@@ -76,5 +69,11 @@ class Spider extends Enemy {
 		}
 
 		super.update(delta);
+	}
+
+	override public function attack(player:Player) {
+		if (overlaps(player)) {
+			player.hurt(1);
+		}
 	}
 }

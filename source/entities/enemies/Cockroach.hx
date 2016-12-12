@@ -17,8 +17,6 @@ class Cockroach extends Enemy {
 
 	private var accelerationSpeed:Int = 1000;
 
-	private var attackCooldown:Float = 0;
-
 	private var chargeCooldown:Float = 6;
 	private var charging:Bool = false;
 	private var chargeTimer:Float = 0;
@@ -48,15 +46,9 @@ class Cockroach extends Enemy {
 	}
 
 	override public function update(delta: Float) {
-		attackCooldown -= delta;
 		chargeCooldown -= delta;
 
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
-
-		if (overlaps(state.player) && attackCooldown <= 0) {
-			attackCooldown = 1;
-			state.player.hurt(1);
-		}
 
 		if (chargeCooldown <= 0 && !charging) {
 			moving = false;
@@ -96,5 +88,11 @@ class Cockroach extends Enemy {
 
 	private function resetMoveSpeed() {
 		moveSpeed = 100 + FlxG.random.int(-30, 30);
+	}
+
+	override public function attack(player:Player) {
+		if (overlaps(player)) {
+			player.hurt(1);
+		}
 	}
 }

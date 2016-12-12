@@ -13,4 +13,8 @@ class Enemy extends Entity {
 		}
 		super.update(delta);
 	}
+
+	public function attack(player:Player) {
+		
+	}
 }

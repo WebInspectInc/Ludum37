@@ -21,8 +21,6 @@ class Deathroach extends Enemy {
 
 	private var accelerationSpeed:Int = 500;
 
-	private var attackCooldown:Float = 0;
-
 	private var eggTimer:Float = 15;
 
 	private var boomSprite:FlxNestedSprite;
@@ -52,7 +50,6 @@ class Deathroach extends Enemy {
 	}
 
 	override public function update(delta: Float) {
-		attackCooldown -= delta;
 		eggTimer -= delta;
 
 		if (eggTimer <= 0) {
@@ -71,11 +68,6 @@ class Deathroach extends Enemy {
 
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
 
-		if (overlaps(state.player) && attackCooldown <= 0) {
-			attackCooldown = 1;
-			state.player.hurt(1);
-		}
-
 		moveAngle = angle;
 
 		super.update(delta);
@@ -86,6 +78,12 @@ class Deathroach extends Enemy {
 		if (health <= 0)
 		{
 			kill();
+		}
+	}
+
+	override public function attack(player:Player) {
+		if (overlaps(player)) {
+			player.hurt(1);
 		}
 	}
 }

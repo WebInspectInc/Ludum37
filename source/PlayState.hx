@@ -164,6 +164,7 @@ class PlayState extends FlxState
 		FlxG.overlap(playerBullets, placedObjects, destroyBullet);
 		FlxG.overlap(evilBullets, placedObjects, destroyBullet);
 		FlxG.overlap(obstacles, player, collideWithObstacle);
+		FlxG.overlap(player, enemies, collidePlayerWithEnemy);
 
 		super.update(elapsed);
 	}
@@ -207,7 +208,6 @@ class PlayState extends FlxState
 			for (enemy in newEnemies) {
 				enemy.state = this;
 				enemy.setPosition(enemy.x + location.x, enemy.y + location.y);
-				// add(enemy);
 			}
 		}
 
@@ -223,5 +223,9 @@ class PlayState extends FlxState
 
 	function destroyBullet(bullet:Bullet, wall:FlxSprite):Void {
 		bullet.kill();
+	}
+
+	function collidePlayerWithEnemy(player:Player, enemy:Enemy) {
+		enemy.attack(player);
 	}
 }
