@@ -135,7 +135,10 @@ class PlayState extends FlxState
 			currentWave = Wave.getWave(waveNumber);
 			resetSpawn = false;
 
-			announceWave();
+			var waves = Wave.genWaves();
+			if (waveNumber < waves.length) {
+				announceWave();
+			}
 
 			if (waveNumber == 2) {
 				var pepper = new PepperGun(250, 500);
