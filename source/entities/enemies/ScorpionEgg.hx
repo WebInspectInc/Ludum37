@@ -5,25 +5,27 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxAngle;
 import flixel.FlxG;
 
-class AntBomb extends Enemy {
+class ScorpionEgg extends Enemy {
 	
-	public var timer:Float = 5;
+	public var timer:Float = 4;
 	public var z:Float = 0;
 	public var zVel:Float;
 	public var grounded:Bool = false;
+	public var mother:MotherSpider;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
 		customMovement = true;
-		loadGraphic(AssetPaths.Roach_egg__png);
-		corpse = AssetPaths.Roach_egg_corpse__png;
+		loadGraphic(AssetPaths.spike_egg__png);
+		corpse = AssetPaths.spike_egg_corpse__png;
 
-		health = 60;
+		health = 20;
 
 		zVel = FlxG.random.float(200, 300);
 		velocity.set(FlxG.random.float(-200, 200), FlxG.random.float(-200, 200));
 		solid = false;
 	}
+
 
 	override public function update(delta:Float) {
 		super.update(delta);
@@ -47,13 +49,18 @@ class AntBomb extends Enemy {
 
 		timer -= delta;
 		if (timer <= 0) {
-			for (i in 0...5) {
+			for (i in 0...6) {
 				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
-				var enemy = new Ant(pos.x + x, pos.y + y, parentGroup, i < 1);
+				var enemy:Enemy = null;
+				if (i < 2) {
+					enemy = new Ant(pos.x + x, pos.y + y, parentGroup);
+				} else if (i < 4) {
+					enemy = new Scorpion(pos.x + x, pos.y + y, parentGroup);
+				} else {
+					enemy = new SuperScorpion(pos.x + x, pos.y + y, parentGroup);
+				}
 				enemy.state = state;
 			}
-			var enemy = new Scorpion(x, y, parentGroup);
-			enemy.state = state;
 			kill();
 			return;
 		}

@@ -15,7 +15,6 @@ class SuperScorpion extends Enemy {
 	private static inline var SPRITE_HEIGHT:Int = 110;
 
 	private var fireTimer:Float = 0;
-	private var shotsLeft:Int = 0;
 	private var firePattern:Int = 0;
 
 	private var turnDirection:Float = 0;

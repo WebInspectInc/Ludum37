@@ -80,7 +80,8 @@ class MotherSpider extends Enemy {
 					var bomb = new AntBomb(x, y, cast(state.enemies));
 					bomb.state = state;
 				case 1:
-					// Scorpion Egg
+					var bomb = new ScorpionEgg(x, y, cast(state.enemies));
+					bomb.state = state;
 				case 2:
 					var bomb = new SpiderEgg(x, y, cast(state.enemies));
 					bomb.mother = this;
