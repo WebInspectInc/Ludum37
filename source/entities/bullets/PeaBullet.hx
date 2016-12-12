@@ -22,6 +22,7 @@ class PeaBullet extends Bullet {
 	override public function hit(e:Entity) {
 		e.hurt(damage);
 		explosionSound.play();
+		var ex = new PeaExplosion(x, y, state, 0, 0, 50, cast(state.playerBullets));
 		kill();
 	}
 
