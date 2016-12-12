@@ -43,7 +43,7 @@ class PeaShooter extends Weapon {
 			ammo -= 1;
 
 			cooldown = 0.23;
-			var newBullet = new PeaBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 1000, cast(state.playerBullets));
+			var newBullet = new PeaBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
 
 			fireSound.play(true);
 			FlxG.camera.shake(0.002, 0.15);
