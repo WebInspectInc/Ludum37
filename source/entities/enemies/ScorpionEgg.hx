@@ -49,12 +49,12 @@ class ScorpionEgg extends Enemy {
 
 		timer -= delta;
 		if (timer <= 0) {
-			for (i in 0...5) {
+			for (i in 0...4) {
 				var pos = FlxAngle.getCartesianCoords(i * 10, i * 70);
 				var enemy:Enemy = null;
 				if (i < 2) {
-					enemy = new Ant(pos.x + x, pos.y + y, parentGroup);
-				} else if (i < 4) {
+					enemy = new Spider(pos.x + x, pos.y + y, parentGroup);
+				} else if (i < 3) {
 					enemy = new Scorpion(pos.x + x, pos.y + y, parentGroup);
 				} else {
 					enemy = new SuperScorpion(pos.x + x, pos.y + y, parentGroup);

@@ -17,6 +17,7 @@ class Scorpion extends Enemy {
 	private var fireTimer:Float = 0;
 
 	private var turnDirection:Float = 0;
+	private var followDistance:Float = 350;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup) {
 		super(X, Y, Group);
@@ -34,6 +35,7 @@ class Scorpion extends Enemy {
 		health = 20;
 
 		turnDirection = FlxG.random.weightedPick([50, 0, 50]) - 1;
+		followDistance = FlxG.random.float(250, 450);
 
 		this.moving = true;
 	}
@@ -48,9 +50,9 @@ class Scorpion extends Enemy {
 
 		var distance = FlxMath.distanceBetween(state.player.center, this);
 
-		if (distance > 400) {
+		if (distance > followDistance + 60) {
 			moveAngle = FlxAngle.angleBetween(this, state.player.center, true);
-		} else if (distance < 280) {
+		} else if (distance < followDistance - 60) {
 			moveAngle = FlxAngle.angleBetween(state.player.center, this, true);
 		} else {
 			moveAngle = FlxAngle.angleBetween(this, state.player.center, true) + 90 * turnDirection;

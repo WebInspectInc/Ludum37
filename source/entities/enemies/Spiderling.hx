@@ -18,12 +18,15 @@ class Spiderling extends Enemy {
 
 	private var accelerationSpeed:Int = 1000;
 
+	private var lastRushTime:Float = 0;
+
 	private var attackCooldown:Float = 0;
 	private var randomPoint:FlxPoint = new FlxPoint();
-	private var chaseTime:Float = 6;
+	public var chaseTime:Float = 6;
 	private var isSuperAnt:Bool = false;
 
 	private var mother:MotherSpider;
+	public var targetPlayer:Bool = true;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup, State:PlayState, Mother:MotherSpider) {
 		super(X, Y, Group);
@@ -57,7 +60,11 @@ class Spiderling extends Enemy {
 
 		var rnd = new FlxRandom();
 		if (chaseTime <= 0 || (x < randomPoint.x + 75 && x > randomPoint.x - 75 && y < randomPoint.y + 75 && y > randomPoint.y - 75)) {
-			randomPoint = new FlxPoint(mother.x + mother.width/2 + rnd.int(-400, 400), mother.y + mother.height/2 + rnd.int(-400, 400));
+			if (targetPlayer) {
+				randomPoint = new FlxPoint(state.player.x + state.player.width/2 + rnd.int(-100, 100), state.player.y + state.player.height/2 + rnd.int(-100, 100));
+			} else {
+				randomPoint = new FlxPoint(mother.x + mother.width/2 + rnd.int(-400, 400), mother.y + mother.height/2 + rnd.int(-400, 400));
+			}
 			chaseTime = 6;
 		}
 		var angle = FlxAngle.angleBetweenPoint(this, randomPoint, true);
@@ -71,6 +78,21 @@ class Spiderling extends Enemy {
 
 		if (velocity.x < 0) {
 			flipX = true;
+		}
+
+		var now = Date.now().getTime();
+		if (now - lastRushTime > 5) {
+			lastRushTime = now;
+			targetPlayer = FlxG.random.weightedPick([10, 1]) == 1;
+			if (targetPlayer) {
+				chaseTime = 0;
+			}
+		}
+
+		if (!targetPlayer) {
+			loadGraphic(AssetPaths.small_spider_walk__png, true, SPRITE_WIDTH, SPRITE_HEIGHT);
+		} else {
+			makeGraphic(50, 30, FlxColor.RED);
 		}
 
 		super.update(delta);
