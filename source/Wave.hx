@@ -22,11 +22,12 @@ class Wave {
 			'Wave 2: Slow But Painful',
 			'Wave 3: A Sticky Situation',
 			'Wave 4: Right Back At Ya, Bro',
-			'Wave 5; The Deathroach',
-			'Wave 6: Testing Your Gnomish Metal'
+			'Wave 5: The Deathroach',
+			'Wave 6: Testing Your Gnomish Metal',
+			'Wave 7: New Ways to Die'
 		];
 	}
-
+ 
 	public function createEnemies(group:FlxGroup):Array<Enemy> {
 		var y = 0.0;
 		var enemies = new Array<Enemy>();
@@ -97,10 +98,7 @@ class Wave {
 						  ]),
 				new Wave([{enemyClass: Deathroach, enemyCount: 1}
 						  ]),
-				new Wave([{enemyClass: Spider, enemyCount: 1},
-						  {enemyClass: Cockroach, enemyCount: 1}]),
 				new Wave([{enemyClass: Cockroach, enemyCount: 1},
-						  {enemyClass: Deathroach, enemyCount: 1},
 						  {enemyClass: Scorpion, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
@@ -109,6 +107,19 @@ class Wave {
 						  {enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Ant, enemyCount: 10}
 						  ]),
+				new Wave([{enemyClass: Scorpion, enemyCount: 1},
+						  {enemyClass: Deathroach, enemyCount: 1},
+						  {enemyClass: Scorpion, enemyCount: 1},
+						  {enemyClass: Scorpion, enemyCount: 2},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: Ant, enemyCount: 5},
+						  {enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Ant, enemyCount: 10}
+						  ]),
+				new Wave([{enemyClass: Spider, enemyCount: 1},
+						  {enemyClass: Cockroach, enemyCount: 1}]),
 				new Wave([{enemyClass: MotherSpider, enemyCount: 1},
 						  {enemyClass: Ant, enemyCount: 10}
 						  ])

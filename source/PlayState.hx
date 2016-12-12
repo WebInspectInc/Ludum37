@@ -135,6 +135,12 @@ class PlayState extends FlxState
 				groundWeapons.add(pepper);
 			}
 
+			if (waveNumber == 5) {
+				var launcher = new Launcher(650, 400);
+				launcher.state = this;
+				groundWeapons.add(launcher);
+			}
+
 			if (musicPlaying != mainTheme) {
 				FlxG.sound.playMusic(mainTheme, 1, true);
 				musicPlaying = mainTheme;
