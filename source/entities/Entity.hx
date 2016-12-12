@@ -75,7 +75,7 @@ class Entity extends FlxNestedSprite {
 	}
 
 	override public function hurt(Damage:Float) {
-		hurtTime = 50; //frames
+		hurtTime = 30; //frames
 
 		health = health - Damage;
 		if (health <= 0)
