@@ -18,7 +18,7 @@ class Spider extends Enemy {
 
 	private var accelerationSpeed:Int = 1000;
 
-	private var webCooldown:Float = 10;
+	private var lastWeb:Float = 0;
 
 	private var turnDirection:Float = 0;
 
@@ -46,8 +46,6 @@ class Spider extends Enemy {
 	}
 
 	override public function update(delta: Float) {
-		webCooldown -= delta;
-
 		var angle = FlxAngle.angleBetween(this, this.state.player, true);
 
 		var distance = FlxMath.distanceBetween(this, this.state.player);
@@ -55,11 +53,10 @@ class Spider extends Enemy {
 			angle = angle + 90 * turnDirection;
 		}
 
-		if (webCooldown <= 0) {
+		if (state.time - lastWeb > 5.2) {
 			var web = new SpiderWeb(x, y, cast(state.obstacles), state);
 			web.state = state;
-
-			webCooldown = 5;
+			lastWeb = state.time;
 		}
 
 		moveAngle = angle;

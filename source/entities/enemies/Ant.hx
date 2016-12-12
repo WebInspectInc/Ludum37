@@ -20,7 +20,7 @@ class Ant extends Enemy {
 	private var accelerationSpeed:Int = 1000;
 
 	private var randomPoint:FlxPoint = new FlxPoint();
-	private var chaseTime:Float = 6;
+	private var timeChaseStarted:Float = 6;
 	private var isSuperAnt:Bool = false;
 
 	public function new(?X:Float=0, ?Y:Float=0, Group:FlxGroup, IsSuper:Bool = false) {
@@ -59,12 +59,11 @@ class Ant extends Enemy {
 	}
 
 	override public function update(delta: Float) {
-		chaseTime -= delta;
 
 		var rnd = new FlxRandom();
-		if (chaseTime <= 0 || (x < randomPoint.x + 75 && x > randomPoint.x - 75 && y < randomPoint.y + 75 && y > randomPoint.y - 75)) {
+		var now = state.time;
+		if (now - timeChaseStarted > 6 || (x < randomPoint.x + 75 && x > randomPoint.x - 75 && y < randomPoint.y + 75 && y > randomPoint.y - 75)) {
 			randomPoint = new FlxPoint(state.player.x + rnd.int(-150, 150), state.player.y + rnd.int(-150, 150));
-			chaseTime = 6;
 		}
 		var angle = FlxAngle.angleBetweenPoint(this, randomPoint, true);
 
