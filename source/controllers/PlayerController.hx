@@ -30,7 +30,7 @@ class PlayerController
 		_left = FlxG.keys.anyPressed([LEFT, A]);
 		_right = FlxG.keys.anyPressed([RIGHT, D]);
 		_fire = FlxG.mouse.pressed;
-		_pickup = FlxG.keys.anyJustPressed([E]);
+		_pickup = FlxG.keys.anyJustPressed([E, SPACE]);
 		_place = FlxG.mouse.justPressedRight;
 		_setDown = FlxG.mouse.justReleasedRight;
 
