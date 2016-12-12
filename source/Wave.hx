@@ -18,13 +18,14 @@ class Wave {
 	public function new(Data:Array<WaveData>) {
 		waveData = Data;
 		waveNames = [
-			'Wave 1: So It Begins',
-			'Wave 2: Slow But Painful',
+			'Wave 1: Our Epic Battle Begins',
+			'Wave 2: Watch Yer Back, Young’n',
 			'Wave 3: A Sticky Situation',
 			'Wave 4: Right Back At Ya, Bro',
 			'Wave 5: The Deathroach',
 			'Wave 6: Testing Your Gnomish Metal',
-			'Wave 7: New Ways to Die'
+			'Wave 7: New Ways to Die',
+			'Wave 8: Mother'
 		];
 	}
  
@@ -118,10 +119,9 @@ class Wave {
 						  {enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Ant, enemyCount: 10}
 						  ]),
-				new Wave([{enemyClass: Spider, enemyCount: 1},
-						  {enemyClass: Cockroach, enemyCount: 1}]),
 				new Wave([{enemyClass: MotherSpider, enemyCount: 1},
-						  {enemyClass: Ant, enemyCount: 10}
+						  {enemyClass: Ant, enemyCount: 10},
+						  {enemyClass: Spider, enemyCount: 3}
 						  ])
 			];
 		}
