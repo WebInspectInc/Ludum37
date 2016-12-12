@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
 import flixel.math.FlxAngle;
+import flixel.FlxSprite;
 import entities.enemies.*;
 
 typedef WaveData = {enemyClass:Class<Enemy>, enemyCount:Int};
@@ -13,19 +14,19 @@ class Wave {
 	private var waveData:Array<WaveData>;
 	private var groupNumber:Int = 0;
 
-	public var waveNames:Array<String> = new Array<String>();
+	public var waveNames:Array<FlxSprite> = new Array<FlxSprite>();
 
 	public function new(Data:Array<WaveData>) {
 		waveData = Data;
 		waveNames = [
-			'Wave 1: Our Epic Battle Begins',
-			'Wave 2: Watch Yer Back, Young’n',
-			'Wave 3: A Sticky Situation',
-			'Wave 4: Right Back At Ya, Bro',
-			'Wave 5: The Deathroach',
-			'Wave 6: Testing Your Gnomish Metal',
-			'Wave 7: New Ways to Die',
-			'Wave 8: Mother'
+			new FlxSprite(0,0,AssetPaths.wave_1__png),
+			new FlxSprite(0,0,AssetPaths.wave_2__png),
+			new FlxSprite(0,0,AssetPaths.wave_3__png),
+			new FlxSprite(0,0,AssetPaths.wave_4__png),
+			new FlxSprite(0,0,AssetPaths.wave_5__png),
+			new FlxSprite(0,0,AssetPaths.wave_6__png),
+			new FlxSprite(0,0,AssetPaths.wave_7__png),
+			new FlxSprite(0,0,AssetPaths.wave_8__png)
 		];
 	}
  
