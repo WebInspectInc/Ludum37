@@ -68,7 +68,8 @@ class Entity extends FlxNestedSprite {
 
 		if (parentGroup != null)
 		{
-			parentGroup.remove(this);
+			// parentGroup.remove(this);
+			parentGroup.members.remove(this);
 		}
 
 		destroy();

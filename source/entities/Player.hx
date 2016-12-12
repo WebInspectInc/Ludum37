@@ -47,7 +47,7 @@ class Player extends Entity
 		setSize(24, 58);
 		offset.set(30, 30);
 
-		playerWeapon = new Launcher();
+		playerWeapon = new PeaShooter();
 		playerWeapon.solid = false;
 		playerWeapon.state = state;
 		add(playerWeapon);
