@@ -46,7 +46,7 @@ class PlayState extends FlxState
 
 	public var currentWave:Wave;
 	public var waveNumber:Int = 0;
-	public var currentText:FlxText;
+	public var currentWaveTitle:FlxSprite;
 
 	public var spawnTimer:Float = 6;
 	public var resetSpawn:Bool = true;
@@ -171,16 +171,17 @@ class PlayState extends FlxState
 	public function announceWave() {
 		var names = currentWave.waveNames;
 
-		currentText = new FlxText(0, 0, -1, names[waveNumber], 20);
-		currentText.color = FlxColor.BLACK;
-		currentText.screenCenter();
-		currentText.scrollFactor.set(0, 0);
-		add(currentText);
+		//currentText = new FlxText(0, 0, -1, names[waveNumber], 20);
+		currentWaveTitle = names[waveNumber];
+		//currentText.color = FlxColor.BLACK;
+		currentWaveTitle.screenCenter();
+		currentWaveTitle.scrollFactor.set(0, 0);
+		add(currentWaveTitle);
 	}
 
 	public function spawnSpawn() {
 		spawnTimer = 1;
-		remove(currentText);
+		remove(currentWaveTitle);
 
 		var center = new FlxPoint(600, 475);
 		var random = FlxG.random;
