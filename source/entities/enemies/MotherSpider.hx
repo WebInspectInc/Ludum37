@@ -63,7 +63,7 @@ class MotherSpider extends Enemy {
 		eggTimer -= delta;
 
 		if (eggTimer <= 0 && eggsLeft == 0) {
-			eggType = FlxG.random.weightedPick([33,33,33]);
+			eggType = FlxG.random.weightedPick([1,1,2]);
 			if (eggType == 2) {
 				if (spiderlings.length > 150) {
 					eggType = FlxG.random.weightedPick([50, 50]);
