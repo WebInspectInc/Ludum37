@@ -42,7 +42,7 @@ class PeaShooter extends Weapon {
 			reloadTimer = 1;
 			ammo -= 1;
 
-			cooldown = 0.17;
+			cooldown = 0.23;
 			var newBullet = new PeaBullet(x + relativeX - offset.x, y + relativeY - offset.y, state, 500, angle, 10, cast(state.playerBullets));
 
 			fireSound.play(true);

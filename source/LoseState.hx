@@ -9,19 +9,17 @@ import flixel.math.FlxMath;
 import flixel.system.macros.FlxAssetPaths;
 import flixel.system.FlxAssets;
 
-class MenuState extends FlxState
+class LoseState extends FlxState
 {
 	public var image:FlxSprite;
 
-	public var startImage:String = AssetPaths.intro_screen__png;
 	public var loseImage:String = AssetPaths.you_died_screen__png;
-	public var winImage:String = AssetPaths.you_won_screen__png;
 
 	override public function create():Void
 	{
 		super.create();
 
-		image = new FlxSprite(0, 0, startImage);
+		image = new FlxSprite(0, 0, loseImage);
 		image.screenCenter();
 		add(image);
 	}
@@ -29,7 +27,7 @@ class MenuState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		if (FlxG.mouse.pressed) {
-			FlxG.switchState(new PlayState());
+			FlxG.resetGame();
 		}
 
 		super.update(elapsed);

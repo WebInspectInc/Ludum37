@@ -149,4 +149,8 @@ class Player extends Entity
 		placing.setDown();
 		placing = null;
 	}
+
+	override public function kill() {
+		FlxG.switchState(new LoseState());
+	}
 }

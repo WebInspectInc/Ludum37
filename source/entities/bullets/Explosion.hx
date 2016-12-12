@@ -29,7 +29,7 @@ class Explosion extends Bullet {
 	override public function update(delta:Float) {
 		if (animation.finished) {
 			if (hurtPlayer) {
-				state.player.hurt(4);
+				//state.player.hurt(4);
 			}
 			kill();
 			return;
