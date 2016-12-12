@@ -71,7 +71,7 @@ class Wave {
 
 	public static function genWaves() {
 		waves = [
-			new Wave([{enemyClass: MotherSpider, enemyCount: 1},
+			new Wave([{enemyClass: Ant, enemyCount: 1},
 					  {enemyClass: Ant, enemyCount: 10}
 					  ]),
 			new Wave([{enemyClass: Ant, enemyCount: 10},

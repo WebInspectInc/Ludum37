@@ -120,7 +120,7 @@ class PlayState extends FlxState
 		time += elapsed;
 		this.playerController.update();
 
-		if (corpses.members.length > 200) {
+		while(corpses.members.length > 100) {
 			var corpse = corpses.members.shift();
 			corpse.destroy();
 		}
