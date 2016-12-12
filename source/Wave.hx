@@ -9,7 +9,7 @@ import entities.enemies.*;
 typedef WaveData = {enemyClass:Class<Enemy>, enemyCount:Int};
 
 class Wave {
-	private static var waves:Array<Wave> = null;
+	public static var waves:Array<Wave> = null;
 
 	private var waveData:Array<WaveData>;
 	private var groupNumber:Int = 0;
@@ -62,20 +62,70 @@ class Wave {
 	}
 
 	public static function getWave(WaveNumber:Int):Wave {
-		var w = genWaves();
-		if (WaveNumber >= w.length) {
+		if (WaveNumber >= waves.length) {
 			FlxG.switchState(new WinState());
+			return null;
 		}
-		return genWaves()[WaveNumber];
+		return waves[WaveNumber];
 	}
 
-	public static function genWaves():Array<Wave> {
-		if (waves == null) {
-			waves = [
-				new Wave([{enemyClass: Ant, enemyCount: 10}
-						  ])
-			];
-		}
-		return waves;
+	public static function genWaves() {
+		waves = [
+			new Wave([{enemyClass: Ant, enemyCount: 1},
+					  {enemyClass: Ant, enemyCount: 10}
+					  ]),
+			new Wave([{enemyClass: Ant, enemyCount: 10},
+					  {enemyClass: Ant, enemyCount: 10},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 2}
+					  ]),
+			new Wave([{enemyClass: Ant, enemyCount: 10},
+					  {enemyClass: Spider, enemyCount: 2},
+					  {enemyClass: Spider, enemyCount: 1},
+					  {enemyClass: Scorpion, enemyCount: 2},
+					  {enemyClass: Spider, enemyCount: 1},
+					  {enemyClass: Spider, enemyCount: 2},
+					  {enemyClass: Spider, enemyCount: 2}
+					  ]),
+			new Wave([{enemyClass: Ant, enemyCount: 10},
+					  {enemyClass: Spider, enemyCount: 2},
+					  {enemyClass: Scorpion, enemyCount: 2},
+					  {enemyClass: Scorpion, enemyCount: 2},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 2},
+					  {enemyClass: Spider, enemyCount: 1},
+					  {enemyClass: Spider, enemyCount: 2}
+					  ]),
+			new Wave([{enemyClass: Deathroach, enemyCount: 1}
+					  ]),
+			new Wave([{enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Scorpion, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: SuperScorpion, enemyCount: 1},
+					  {enemyClass: Ant, enemyCount: 5},
+					  {enemyClass: Ant, enemyCount: 10},
+					  {enemyClass: Ant, enemyCount: 10}
+					  ]),
+			new Wave([{enemyClass: SuperScorpion, enemyCount: 1},
+					  {enemyClass: Deathroach, enemyCount: 1},
+					  {enemyClass: SuperScorpion, enemyCount: 1},
+					  {enemyClass: Scorpion, enemyCount: 2},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Cockroach, enemyCount: 1},
+					  {enemyClass: Ant, enemyCount: 5},
+					  {enemyClass: Ant, enemyCount: 10},
+					  {enemyClass: Ant, enemyCount: 10}
+					  ]),
+			new Wave([{enemyClass: MotherSpider, enemyCount: 1},
+					  {enemyClass: Ant, enemyCount: 10},
+					  {enemyClass: Spider, enemyCount: 3},
+					  {enemyClass: SuperScorpion, enemyCount: 1},
+					  {enemyClass: Ant, enemyCount: 10}
+					  ])
+		];
 	}
 }

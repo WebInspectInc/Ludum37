@@ -93,6 +93,7 @@ class PlayState extends FlxState
 		// launcher.state = this;
 		// groundWeapons.add(launcher);
 
+		Wave.genWaves();
 		currentWave = Wave.getWave(waveNumber);
 
 		playerController = new PlayerController(this.player, level);
@@ -119,7 +120,7 @@ class PlayState extends FlxState
 		time += elapsed;
 		this.playerController.update();
 
-		if (corpses.members.length > 200) {
+		while(corpses.members.length > 100) {
 			var corpse = corpses.members.shift();
 			corpse.destroy();
 		}
@@ -135,8 +136,7 @@ class PlayState extends FlxState
 			currentWave = Wave.getWave(waveNumber);
 			resetSpawn = false;
 
-			var waves = Wave.genWaves();
-			if (waveNumber < waves.length) {
+			if (waveNumber < Wave.waves.length) {
 				announceWave();
 			}
 
