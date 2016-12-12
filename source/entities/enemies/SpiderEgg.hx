@@ -24,6 +24,7 @@ class SpiderEgg extends Enemy {
 		zVel = FlxG.random.float(200, 300);
 		velocity.set(FlxG.random.float(-200, 200), FlxG.random.float(-200, 200));
 		solid = false;
+		FlxG.camera.shake(0.05, 0.1);
 	}
 
 
