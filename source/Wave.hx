@@ -104,13 +104,14 @@ class Wave {
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
+						  {enemyClass: SuperScorpion, enemyCount: 1},
 						  {enemyClass: Ant, enemyCount: 5},
 						  {enemyClass: Ant, enemyCount: 10},
 						  {enemyClass: Ant, enemyCount: 10}
 						  ]),
-				new Wave([{enemyClass: Scorpion, enemyCount: 1},
+				new Wave([{enemyClass: SuperScorpion, enemyCount: 1},
 						  {enemyClass: Deathroach, enemyCount: 1},
-						  {enemyClass: Scorpion, enemyCount: 1},
+						  {enemyClass: SuperScorpion, enemyCount: 1},
 						  {enemyClass: Scorpion, enemyCount: 2},
 						  {enemyClass: Cockroach, enemyCount: 1},
 						  {enemyClass: Cockroach, enemyCount: 1},
@@ -121,7 +122,9 @@ class Wave {
 						  ]),
 				new Wave([{enemyClass: MotherSpider, enemyCount: 1},
 						  {enemyClass: Ant, enemyCount: 10},
-						  {enemyClass: Spider, enemyCount: 3}
+						  {enemyClass: Spider, enemyCount: 3},
+						  {enemyClass: SuperScorpion, enemyCount: 1},
+						  {enemyClass: Ant, enemyCount: 10}
 						  ])
 			];
 		}
