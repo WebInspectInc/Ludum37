@@ -157,7 +157,7 @@ class Player extends Entity
 	}
 
 	override public function hurt(damage:Float) {
-		var now = Date.now().getTime();
+		var now = state.time;
 		if (now - lastHurt > 1) {
 			super.hurt(damage);
 			lastHurt = now;
